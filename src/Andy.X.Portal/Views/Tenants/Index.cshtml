@@ -1,0 +1,51 @@
+﻿@using Andy.X.Portal.Models.Tenants
+@model TenantListViewModel
+@{
+    ViewData["Title"] = "Tenants";
+}
+
+<div class="shadow-1" aria-label="breadcrumb">
+    <ol class="breadcrumb ms-3 p-1">
+        <li class="breadcrumb-item"><a href="#">TENANTS</a></li>
+        <li class="breadcrumb-item active" aria-current="page">OVERVIEW</li>
+    </ol>
+</div>
+
+<div class="container mt-5">
+    @foreach (var tenant in Model.Tenants)
+    {
+        <div class="card border shadow-1 rounded-0 mb-3">
+            <div class="d-flex  g-0">
+                <div class="col-md-2 d-flex  justify-content-center align-items-center bg-light"
+                 style="height: 131px;">
+                    <img src="~/assets/tenant-100.png"
+                     height="70"
+                     alt=""
+                     loading="lazy" />
+
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card-body px-3 pt-2">
+                        <h6 class="text-uppercase text-muted">Tenant</h6>
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="w-100 mb-3"><strong>@tenant</strong></h5>
+                            </div>
+                            <div class="col" style="text-align: right">
+                                <a class="btn btn-light" type="button" asp-area="" asp-controller="Tenants" asp-action="Details" asp-route-id="@tenant">View</a>
+                            </div>
+                        </div>
+                        <div class="position-absolute" style="bottom: 0;">
+                            <div class="w-100 ps-1 pb-2">
+                                <div class="col">
+                                    <span class="badge rounded-pill bg-success">ONLINE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

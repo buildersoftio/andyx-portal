@@ -1,0 +1,53 @@
+﻿@using Andy.X.Portal.Models.Products
+@model ProductListViewModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="shadow-1" aria-label="breadcrumb">
+    <ol class="breadcrumb ms-3 p-1">
+        <li class="breadcrumb-item"><a href="#">PRODUCTS</a></li>
+        <li class="breadcrumb-item active" aria-current="page">OVERVIEW</li>
+    </ol>
+</div>
+
+<div class="container mt-5">
+    @foreach(var product in Model.Products)
+    {
+        <div class="card border shadow-1 rounded-0 mb-3">
+            <div class="d-flex  g-0">
+                <div class="col-md-2 d-flex  justify-content-center align-items-center bg-light"
+                 style="height: 131px;">
+                    <img src="~/assets/product-128.png"
+                     height="70"
+                     alt=""
+                     loading="lazy" />
+
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card-body px-3 pt-2">
+                        <h6 class="text-uppercase text-muted">Product</h6>
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="w-100 mb-3"><strong>@product.Tenant / @product.Product</strong></h5>
+                            </div>
+                            <div class="col" style="text-align: right">
+                                <a class="btn btn-light" type="button" asp-area="" asp-controller="Products" asp-action="Details" asp-route-id="@product.Product">View</a>
+                            </div>
+                        </div>
+                        <div class="position-absolute" style="bottom: 0;">
+                            <div class="w-100 ps-1 pb-2">
+                                <div class="col">
+                                    <span class="badge rounded-pill bg-success">@product.Tenant</span>
+                                    <span class="badge rounded-pill bg-info">@product.Product</span>
+                                    <span class="badge rounded-pill bg-secondary">tag</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

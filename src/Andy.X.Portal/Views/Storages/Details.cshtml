@@ -1,0 +1,53 @@
+﻿@using Andy.X.Portal.Models.Storages
+@model StorageDetailsViewModel
+
+@{
+    ViewData["Title"] = Model.StorageName;
+}
+
+<div class="shadow-1" aria-label="breadcrumb">
+    <ol class="breadcrumb ms-3 p-1">
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Storages" asp-action="Index">STORAGES</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.StorageName</li>
+    </ol>
+</div>
+
+<div class="container mt-5">
+    <h6 class="text-uppercase text-muted">Storage</h6>
+    <div class="row">
+        <p class="col-auto header"><strong>@Model.StorageName</strong></p>
+        <div class="col-auto">
+            <p><span class="badge subtitle rounded-pill bg-success">ONLINE</span></p>
+        </div>
+        <div class="col-auto">
+            <p><span class="badge subtitle rounded-pill bg-dark">SHARDING</span></p>
+        </div>
+    </div>
+
+
+    <div class="row mb-5 mt-5">
+        <div class="col">
+            <div class="shadow-2 p-4">
+                <p class="text-uppercase caption text-muted">Agents Max Connection</p>
+                <p class="subheader"><strong>@Model.AgentMaxNumber</strong></p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="shadow-2 p-4">
+                <p class="text-uppercase caption text-muted">Agents Connected</p>
+                <p class="subheader"><strong>@Model.Agents.Count()</strong></p>
+            </div>
+        </div>
+        <div class="col">
+            <div class=" shadow-2 p-4">
+                <p class="text-uppercase caption text-muted">Memory Consumption</p>
+                <p class="subheader"><strong>n/a GB</strong></p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="shadow-2 p-4"  style="height:550px">
+            <p class="text-uppercase caption text-muted">Input and output</p>
+        </div>
+    </div>
+</div>

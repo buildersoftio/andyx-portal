@@ -1,0 +1,117 @@
+﻿@using Andy.X.Portal.Models.Tenants
+@model TenantDetailsViewModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+<div class="shadow-1" aria-label="breadcrumb">
+    <ol class="breadcrumb ms-3 p-1">
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Tenants" asp-action="Index">TENANTS</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+    </ol>
+</div>
+
+<div class="container mt-5">
+    <h6 class="text-uppercase text-muted">Tenant</h6>
+    <div class="row">
+        <p class="col-auto header"><strong>@Model.Name</strong></p>
+        <div class="col-auto">
+            <p><span class="badge subtitle rounded-pill bg-success">ONLINE</span></p>
+        </div>
+    </div>
+
+
+    <div class="row mb-5 mt-5">
+        <div class="col">
+            <div class="shadow-2 p-4">
+                <p class="text-uppercase caption text-muted">Products</p>
+                <p class="subheader"><strong>n/a</strong></p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="shadow-2 p-4">
+                <p class="text-uppercase caption text-muted">Components</p>
+                <p class="subheader"><strong>n/a</strong></p>
+            </div>
+        </div>
+        <div class="col">
+            <div class=" shadow-2 p-4">
+                <p class="text-uppercase caption text-muted">Topics</p>
+                <p class="subheader"><strong>n/a</strong></p>
+            </div>
+        </div>
+    </div>
+    <section>
+
+        <!-- Tabs navs -->
+        <ul class="nav nav-tabs nav-fill mb-3" id="ex-2" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active"
+                   id="ex-2-tab-1"
+                   data-mdb-toggle="pill"
+                   href="#ex-2-tabs-1"
+                   role="tab"
+                   aria-controls="pills-1"
+                   aria-selected="true">Overview</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link"
+                   id="ex-2-tab-2"
+                   data-mdb-toggle="pill"
+                   href="#ex-2-tabs-2"
+                   role="tab"
+                   aria-controls="pills-2"
+                   aria-selected="false">Authorization</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link"
+                   id="ex-2-tab-3"
+                   data-mdb-toggle="pill"
+                   href="#ex-2-tabs-3"
+                   role="tab"
+                   aria-controls="pills-3"
+                   aria-selected="false">Certificates</a>
+            </li>
+        </ul>
+        <!-- Tabs navs -->
+        <!-- Tabs content-->
+        <div class="tab-content" id="ex-2-content">
+            <div class="tab-pane fade show active"
+                 id="ex-2-tabs-1"
+                 role="tabpanel"
+                 aria-labelledby="pills-1-tab">
+                <div class="form-outline m-4">
+                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.Name">
+                    <label class="form-label" for="formControlLg">NAME</label>
+                </div>
+                <div class="form-outline m-4">
+                    <input type="text" id="formControlLg" class="form-control form-control-lg" value="@Model.Settings.AllowProductCreation.ToString()">
+                    <label class="form-label" for="formControlLg">ALLOW PRODUCT CREATION</label>
+                </div>
+                <div class="form-outline m-4">
+                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.Settings.EnableEncryption.ToString()">
+                    <label class="form-label" for="formControlLg">ENABLE ENCRYPTION IN MOTION</label>
+                </div>
+                <div class="form-outline m-4">
+                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.Settings.EnableEncryption.ToString()">
+                    <label class="form-label" for="formControlLg">ENABLE ENCRYPTION IN REST</label>
+                </div>
+                <div class="form-outline m-4">
+                    <input type="text" id="formControlLg" class="form-control form-control-lg" value="@Model.Settings.EnableGeoReplication.ToString()">
+                    <label class="form-label" for="formControlLg">ENABLE GEO-REPLICATION</label>
+                </div>
+                <div class="form-outline m-4">
+                    <input type="text" id="formControlLg" class="form-control form-control-lg" value="@Model.Settings.Logging.ToString()">
+                    <label class="form-label" for="formControlLg">LOGGING LEVEL</label>
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="ex-2-tabs-2" role="tabpanel" aria-labelledby="pills-2-tab">
+                to be implemented
+            </div>
+            <div class="tab-pane fade" id="ex-2-tabs-3" role="tabpanel" aria-labelledby="pills-3-tab">
+                to be implemented
+            </div>
+        </div>
+        <!-- Tabs content-->
+    </section>
+</div>
