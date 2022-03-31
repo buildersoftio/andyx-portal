@@ -1,12 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Andy.X.Portal.Services.Producers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Andy.X.Portal.Controllers
 {
     public class ProducersController : Controller
     {
+        private readonly ProducerService producerService;
+
+        public ProducersController(ProducerService producerService)
+        {
+            this.producerService = producerService;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            return View(producerService.GetProducerListViewModel());
         }
     }
 }

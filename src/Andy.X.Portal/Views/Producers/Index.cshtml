@@ -1,8 +1,10 @@
-﻿@{
+﻿@using Andy.X.Portal.Models.Producers
+@model ProducerListViewModel
+@{
     ViewData["Title"] = "Producers";
 }
 
-<div class="shadow-1" aria-label="breadcrumb">
+<div class="border-bottom" style="height:30px" aria-label="breadcrumb">
     <ol class="breadcrumb ms-3 p-1">
         <li class="breadcrumb-item"><a href="#">PRODUCERS</a></li>
         <li class="breadcrumb-item active" aria-current="page">OVERVIEW</li>
@@ -11,7 +13,7 @@
 
 
 <div class="container mt-5">
-    @for (int i = 1; i <= 10; i++)
+    @foreach(var producer in Model.Producers)
     {
         <div class="card border shadow-1 rounded-0 mb-3">
             <div class="d-flex  g-0">
@@ -26,13 +28,13 @@
 
                 <div class="col-md-8">
                     <div class="card-body px-3 pt-2">
-                        <h6 class="text-uppercase text-muted">Storage</h6>
+                        <h6 class="text-uppercase text-muted">Producer</h6>
                         <div class="row">
                             <div class="col">
-                                <h5 class="w-100 mb-3"><strong>producer-00</strong></h5>
+                                <h5 class="w-100 mb-3"><strong>@producer</strong></h5>
                             </div>
                             <div class="col" style="text-align: right">
-                                <a class="btn btn-light" type="button" asp-area="" asp-controller="Storage" asp-action="Details">View</a>
+                                <a class="btn btn-light" type="button" asp-area="" asp-controller="Producers" asp-action="Details" asp-route-id="@producer">View</a>
                             </div>
                         </div>
                         <div class="position-absolute" style="bottom: 0;">

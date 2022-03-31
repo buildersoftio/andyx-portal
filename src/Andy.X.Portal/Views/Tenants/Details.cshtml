@@ -3,7 +3,8 @@
 @{
     ViewData["Title"] = Model.Name;
 }
-<div class="shadow-1" aria-label="breadcrumb">
+
+<div class="border-bottom" style="height:30px" aria-label="breadcrumb">
     <ol class="breadcrumb ms-3 p-1">
         <li class="breadcrumb-item"><a asp-area="" asp-controller="Tenants" asp-action="Index">TENANTS</a></li>
         <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
@@ -84,7 +85,7 @@
                     <label class="form-label" for="formControlLg">NAME</label>
                 </div>
                 <div class="form-outline m-4">
-                    <input type="text" id="formControlLg" class="form-control form-control-lg" value="@Model.Settings.AllowProductCreation.ToString()">
+                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.Settings.AllowProductCreation.ToString()">
                     <label class="form-label" for="formControlLg">ALLOW PRODUCT CREATION</label>
                 </div>
                 <div class="form-outline m-4">
@@ -96,11 +97,11 @@
                     <label class="form-label" for="formControlLg">ENABLE ENCRYPTION IN REST</label>
                 </div>
                 <div class="form-outline m-4">
-                    <input type="text" id="formControlLg" class="form-control form-control-lg" value="@Model.Settings.EnableGeoReplication.ToString()">
+                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.Settings.EnableGeoReplication.ToString()">
                     <label class="form-label" for="formControlLg">ENABLE GEO-REPLICATION</label>
                 </div>
                 <div class="form-outline m-4">
-                    <input type="text" id="formControlLg" class="form-control form-control-lg" value="@Model.Settings.Logging.ToString()">
+                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.Settings.Logging.ToString()">
                     <label class="form-label" for="formControlLg">LOGGING LEVEL</label>
                 </div>
 
