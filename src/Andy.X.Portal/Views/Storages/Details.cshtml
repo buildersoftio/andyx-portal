@@ -45,9 +45,103 @@
             </div>
         </div>
     </div>
-    <div>
-        <div class="shadow-2 p-4"  style="height:550px">
-            <p class="text-uppercase caption text-muted">Input and output</p>
+
+    <section>
+
+        <!-- Tabs navs -->
+        <ul class="nav nav-tabs nav-fill mb-3" id="ex-2" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active"
+                   id="ex-2-tab-1"
+                   data-mdb-toggle="pill"
+                   href="#ex-2-tabs-1"
+                   role="tab"
+                   aria-controls="pills-1"
+                   aria-selected="true">Overview</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link"
+                   id="ex-2-tab-2"
+                   data-mdb-toggle="pill"
+                   href="#ex-2-tabs-2"
+                   role="tab"
+                   aria-controls="pills-2"
+                   aria-selected="false">Agents</a>
+            </li>
+        </ul>
+        <!-- Tabs navs -->
+        <!-- Tabs content-->
+        <div class="tab-content" id="ex-2-content">
+            <div class="tab-pane fade show active"
+                 id="ex-2-tabs-1"
+                 role="tabpanel"
+                 aria-labelledby="pills-1-tab">
+                <div class="form-outline m-4">
+                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.StorageId">
+                    <label class="form-label" for="formControlLg">ID</label>
+                </div>
+                <div class="form-outline m-4">
+                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.StorageName">
+                    <label class="form-label" for="formControlLg">NAME</label>
+                </div>
+                <div class="form-outline m-4">
+                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.StorageStatus.ToString()">
+                    <label class="form-label" for="formControlLg">STATUS</label>
+                </div>
+                <div class="form-outline m-4">
+                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.IsLoadBalanced.ToString()">
+                    <label class="form-label" for="formControlLg">IS LOAD BALANCED</label>
+                </div>
+                <div class="form-outline m-4">
+                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.AgentMaxNumber">
+                    <label class="form-label" for="formControlLg">AGENT MAX NUMBER</label>
+                </div>
+                <div class="form-outline m-4">
+                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.AgentMinNumber">
+                    <label class="form-label" for="formControlLg">AGENT MIN NUMBER</label>
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="ex-2-tabs-2" role="tabpanel" aria-labelledby="pills-2-tab">
+                <div class="container mt-5">
+                    @foreach (var agent in Model.Agents.Values)
+                    {
+                        <div class="card border shadow-1 rounded-0 mb-3">
+                            <div class="d-flex  g-0">
+                                <div class="col-md-2 d-flex  justify-content-center align-items-center bg-light"
+                                 style="height: 131px;">
+                                    <img src="~/assets/connection-64.png"
+                                     class=""
+                                     height="64"
+                                     alt=""
+                                     loading="lazy" />
+
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="card-body px-3 pt-2">
+                                        <h6 class="text-uppercase text-muted">Agent</h6>
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5 class="w-100 mb-1"><strong>@agent.AgentName</strong></h5>
+                                                <p class="w-100 mb-3"><strong>@agent.ConnectionId</strong></p>
+                                            </div>
+                                        </div>
+                                        <div class="position-absolute" style="bottom: 0;">
+                                            <div class="w-100 ps-1 pb-2">
+                                                <div class="col">
+                                                    <span class="badge rounded-pill bg-success">ONLINE</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
-    </div>
+        <!-- Tabs content-->
+    </section>
 </div>
