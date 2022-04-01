@@ -23,25 +23,26 @@
 
     <div class="row mb-5 mt-5">
         <div class="col">
-            <div class="shadow-2 p-4">
+            <div class="border p-4">
                 <p class="text-uppercase caption text-muted">Products</p>
                 <p class="subheader"><strong>n/a</strong></p>
             </div>
         </div>
         <div class="col">
-            <div class="shadow-2 p-4">
+            <div class="border p-4">
                 <p class="text-uppercase caption text-muted">Components</p>
                 <p class="subheader"><strong>n/a</strong></p>
             </div>
         </div>
         <div class="col">
-            <div class=" shadow-2 p-4">
+            <div class=" border p-4">
                 <p class="text-uppercase caption text-muted">Topics</p>
                 <p class="subheader"><strong>n/a</strong></p>
             </div>
         </div>
     </div>
-    <section>
+
+    <section class="border">
 
         <!-- Tabs navs -->
         <ul class="nav nav-tabs nav-fill mb-3" id="ex-2" role="tablist">
@@ -75,34 +76,40 @@
         </ul>
         <!-- Tabs navs -->
         <!-- Tabs content-->
-        <div class="tab-content" id="ex-2-content">
+        <div class="tab-content mx-3" id="ex-2-content">
             <div class="tab-pane fade show active"
                  id="ex-2-tabs-1"
                  role="tabpanel"
                  aria-labelledby="pills-1-tab">
-                <div class="form-outline m-4">
-                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.Name">
-                    <label class="form-label" for="formControlLg">NAME</label>
+
+                <p class="text-uppercase">Name</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Name
                 </div>
-                <div class="form-outline m-4">
-                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.Settings.AllowProductCreation.ToString()">
-                    <label class="form-label" for="formControlLg">ALLOW PRODUCT CREATION</label>
+
+                <p class="text-uppercase">ALLOW PRODUCT CREATION</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Settings.AllowProductCreation
                 </div>
-                <div class="form-outline m-4">
-                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.Settings.EnableEncryption.ToString()">
-                    <label class="form-label" for="formControlLg">ENABLE ENCRYPTION IN MOTION</label>
+
+                <p class="text-uppercase">ENABLE ENCRYPTION IN MOTION</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Settings.EnableEncryption
                 </div>
-                <div class="form-outline m-4">
-                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.Settings.EnableEncryption.ToString()">
-                    <label class="form-label" for="formControlLg">ENABLE ENCRYPTION IN REST</label>
+
+                <p class="text-uppercase">ENABLE ENCRYPTION IN REST</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Settings.EnableEncryption
                 </div>
-                <div class="form-outline m-4">
-                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.Settings.EnableGeoReplication.ToString()">
-                    <label class="form-label" for="formControlLg">ENABLE GEO-REPLICATION</label>
+
+                <p class="text-uppercase">ENABLE GEO-REPLICATION</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Settings.EnableGeoReplication
                 </div>
-                <div class="form-outline m-4">
-                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.Settings.Logging.ToString()">
-                    <label class="form-label" for="formControlLg">LOGGING LEVEL</label>
+
+                <p class="text-uppercase">LOGGING LEVEL</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Settings.Logging.ToString()
                 </div>
 
             </div>

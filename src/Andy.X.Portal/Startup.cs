@@ -1,3 +1,4 @@
+using Andy.X.Portal.Configurations;
 using Andy.X.Portal.Services.Consumers;
 using Andy.X.Portal.Services.Producers;
 using Andy.X.Portal.Services.Products;
@@ -24,6 +25,10 @@ namespace Andy.X.Portal
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            var xNodeConfiguration = new XNodeConfiguration();
+            Configuration.Bind("XNode", xNodeConfiguration);
+            services.AddSingleton(xNodeConfiguration);
 
             services.AddSingleton<StorageService>();
             services.AddSingleton<TenantService>();

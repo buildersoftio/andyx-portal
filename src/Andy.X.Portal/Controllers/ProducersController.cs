@@ -16,5 +16,10 @@ namespace Andy.X.Portal.Controllers
         {
             return View(producerService.GetProducerListViewModel());
         }
+
+        public IActionResult Details(string id)
+        {
+            return View(producerService.GetProducerDetailsViewModel(id));
+        }
     }
 }

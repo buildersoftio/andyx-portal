@@ -1,0 +1,63 @@
+﻿@using Andy.X.Portal.Models.Producers
+@model ProducerDetailsViewModel
+@{
+    ViewData["Title"] = @Model.ProducerName;
+}
+
+<div class="border-bottom" style="height:30px" aria-label="breadcrumb">
+    <ol class="breadcrumb ms-3 p-1">
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Producers" asp-action="Index">PRODUCERS</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.ProducerName</li>
+    </ol>
+</div>
+
+<div class="container mt-5">
+    <h6 class="text-uppercase text-muted">Producer</h6>
+    <div class="row">
+        <p class="col-auto header"><strong>@Model.ProducerName</strong></p>
+        <div class="col-auto">
+            <p><span class="badge subtitle rounded-pill bg-success">ONLINE</span></p>
+        </div>
+    </div>
+    <p class="col-auto subheader">@Model.Tenant / @Model.Product / @Model.Component / @Model.Topic / <strong>@Model.ProducerName</strong></p>
+
+    <div class="row mb-5 mt-5">
+        <div class="col">
+            <div class="border p-4">
+                <p class="text-uppercase caption text-muted">Overview</p>
+
+                <p class="text-uppercase">Tenant</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Tenant
+                </div>
+                <p class="text-uppercase">Product</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Product
+                </div>
+                <p class="text-uppercase">Component</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Component
+                </div>
+                <p class="text-uppercase">Topic</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Topic
+                </div>
+
+                <p class="text-uppercase">Producer Id</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Id
+                </div>
+
+                <p class="text-uppercase">Producer Name</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.ProducerName
+                </div>
+                <p class="text-uppercase">Connected to this node</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.IsLocal.ToString()
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

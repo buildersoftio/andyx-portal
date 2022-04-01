@@ -1,0 +1,95 @@
+﻿@using Andy.X.Portal.Models.Products
+@model ProductDetailsViewModel
+@{
+    ViewData["Title"] = @Model.Name;
+}
+
+<div class="border-bottom" style="height:30px" aria-label="breadcrumb">
+    <ol class="breadcrumb ms-3 p-1">
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Products" asp-action="Index">PRODUCTS</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+    </ol>
+</div>
+
+
+<div class="container mt-5">
+    <h6 class="text-uppercase text-muted">Product</h6>
+    <div class="row">
+        <p class="col-auto header">@Model.Tenant / <strong>@Model.Name</strong></p>
+        <div class="col-auto">
+            <p><span class="badge subtitle rounded-pill bg-success">ONLINE</span></p>
+        </div>
+    </div>
+
+
+    <div class="row mb-5 mt-5">
+        <div class="col">
+            <div class="border p-4">
+                <p class="text-uppercase caption text-muted">Overview</p>
+
+                <p class="text-uppercase">Product Owner</p>
+                <div class="alert alert-light" role="alert">
+                    NO INFO
+                </div>
+                <p class="text-uppercase">Product Team</p>
+                <div class="alert alert-light" role="alert">
+                    NO INFO
+                </div>
+                <p class="text-uppercase">Contact</p>
+                <button type="button" class="btn btn-primary">Email</button>
+
+                <p class="text-uppercase mt-3">Tags</p>
+                <div class="w-100 ps-1 pb-2">
+                    <div class="col">
+                        <span class="badge base rounded-pill bg-success">@Model.Tenant</span>
+                        <span class="badge base rounded-pill bg-info">@Model.Name</span>
+                        <span class="badge base rounded-pill bg-secondary">tag</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <h6 class="text-uppercase text-muted  mt-5">Components</h6>
+    @foreach (var component in Model.Components.Values)
+    {
+        <div class="card border rounded-0 mb-3">
+            <div class="d-flex  g-0">
+                <div class="col-md-2 d-flex  justify-content-center align-items-center bg-light"
+                 style="height: 131px;">
+                    <img src="~/assets/component-100.png"
+                     height="70"
+                     alt=""
+                     loading="lazy" />
+
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card-body px-3 pt-2">
+                        <h6 class="text-uppercase text-muted">Component</h6>
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="w-100 mb-3"><strong>@component.Name</strong></h5>
+                            </div>
+                            <div class="col" style="text-align: right">
+                                <a class="btn btn-light" type="button" asp-area="" asp-controller="Products" asp-action="Details" asp-route-tenant="@Model.Tenant" asp-route-product="@Model.Name" asp-route-id="@component.Name">View</a>
+                            </div>
+                        </div>
+                        <div class="position-absolute" style="bottom: 0;">
+                            <div class="w-100 ps-1 pb-2">
+                                <div class="col">
+                                    <span class="badge rounded-pill bg-primary">@component.Id</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <h6 class="text-uppercase text-muted  mt-5">Count @Model.Components.Count</h6>
+
+
+</div>

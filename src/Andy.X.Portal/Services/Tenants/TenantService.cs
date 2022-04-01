@@ -1,4 +1,5 @@
-﻿using Andy.X.Portal.Extensions;
+﻿using Andy.X.Portal.Configurations;
+using Andy.X.Portal.Extensions;
 using Andy.X.Portal.Models.Tenants;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -10,10 +11,12 @@ namespace Andy.X.Portal.Services.Tenants
     public class TenantService
     {
         private readonly ILogger<TenantService> logger;
+        private readonly XNodeConfiguration xNodeConfiguration;
 
-        public TenantService(ILogger<TenantService> logger)
+        public TenantService(ILogger<TenantService> logger, XNodeConfiguration xNodeConfiguration)
         {
             this.logger = logger;
+            this.xNodeConfiguration = xNodeConfiguration;
         }
 
         public TenantListViewModel GetTenantListViewModel()
@@ -23,8 +26,8 @@ namespace Andy.X.Portal.Services.Tenants
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("x-called-by", $"Andy X Portal");
 
-            string request = $"http://localhost:9001/api/v1/tenants";
-            client.AddBasicAuthorizationHeader("admin", "admin");
+            string request = $"{xNodeConfiguration.ServiceUrl}/api/v1/tenants";
+            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -44,8 +47,8 @@ namespace Andy.X.Portal.Services.Tenants
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("x-called-by", $"Andy X Portal");
 
-            string request = $"http://localhost:9001/api/v1/tenants/{tenantName}";
-            client.AddBasicAuthorizationHeader("admin", "admin");
+            string request = $"{xNodeConfiguration.ServiceUrl}/api/v1/tenants/{tenantName}";
+            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;

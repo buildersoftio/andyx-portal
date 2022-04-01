@@ -1,0 +1,189 @@
+﻿@using Andy.X.Portal.Models.Consumers
+@model ConsumerDetailsViewModel
+@{
+    ViewData["Title"] = @Model.ConsumerName;
+}
+
+<div class="border-bottom" style="height:30px" aria-label="breadcrumb">
+    <ol class="breadcrumb ms-3 p-1">
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Consumers" asp-action="Index">CONSUMERS</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.ConsumerName</li>
+    </ol>
+</div>
+
+<div class="container mt-5">
+    <h6 class="text-uppercase text-muted">Consumer</h6>
+    <div class="row">
+        <p class="col-auto header"><strong>@Model.ConsumerName</strong></p>
+        <div class="col-auto">
+            <p><span class="badge subtitle rounded-pill bg-success">ONLINE</span></p>
+        </div>
+        <div class="col-auto">
+            <p>
+                <span class="badge subtitle rounded-pill bg-dark"
+                      data-mdb-toggle="popover"
+                      title="@Model.SubscriptionType.ToString()"
+                      data-mdb-content="There are three types of Subscriptions for Consumers Exclusive, Failover and Shared">@Model.SubscriptionType.ToString().ToUpper()</span>
+            </p>
+        </div>
+    </div>
+    <p class="col-auto subheader">@Model.Tenant / @Model.Product / @Model.Component / @Model.Topic / <strong>@Model.ConsumerName</strong></p>
+
+    <section class="mt-5 border">
+
+        <!-- Tabs navs -->
+        <ul class="nav nav-tabs nav-fill mb-3" id="ex-2" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active"
+                   id="ex-2-tab-1"
+                   data-mdb-toggle="pill"
+                   href="#ex-2-tabs-1"
+                   role="tab"
+                   aria-controls="pills-1"
+                   aria-selected="true">Overview</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link"
+                   id="ex-2-tab-2"
+                   data-mdb-toggle="pill"
+                   href="#ex-2-tabs-2"
+                   role="tab"
+                   aria-controls="pills-2"
+                   aria-selected="false">Connections</a>
+            </li>
+        </ul>
+        <!-- Tabs navs -->
+        <!-- Tabs content-->
+        <div class="tab-content" id="ex-2-content">
+            <div class="tab-pane fade show active m-3"
+                 id="ex-2-tabs-1"
+                 role="tabpanel"
+                 aria-labelledby="pills-1-tab">
+                <p class="text-uppercase">Tenant</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Tenant
+                </div>
+                <p class="text-uppercase">Product</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Product
+                </div>
+                <p class="text-uppercase">Component</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Component
+                </div>
+                <p class="text-uppercase">Topic</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Topic
+                </div>
+
+                <p class="text-uppercase">Consumer Id</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Id
+                </div>
+
+                <p class="text-uppercase">Consumer Name</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.ConsumerName
+                </div>
+                <p class="text-uppercase">Subscription Type</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.SubscriptionType.ToString()
+                </div>
+                <p class="text-uppercase">Initial Position</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.ConsumerSettings.InitialPosition.ToString()
+                </div>
+                <p class="text-uppercase">Instances connected</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.Connections.Count().ToString()
+                </div>
+                <p class="text-uppercase">External Instances connected</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.ExternalConnections.Count().ToString()
+                </div>
+                <p class="text-uppercase">Connected to this node</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.IsLocal.ToString()
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="ex-2-tabs-2" role="tabpanel" aria-labelledby="pills-2-tab">
+                <div class="container mt-5">
+                    @foreach (var connection in Model.Connections)
+                    {
+                        <div class="card border rounded-0 mb-3">
+                            <div class="d-flex  g-0">
+                                <div class="col-md-2 d-flex  justify-content-center align-items-center bg-light"
+                                 style="height: 131px;">
+                                    <img src="~/assets/connection-64.png"
+                                     class=""
+                                     height="64"
+                                     alt=""
+                                     loading="lazy" />
+
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="card-body px-3 pt-2">
+                                        <h6 class="text-uppercase text-muted">Connection</h6>
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5 class="w-100 mb-1"><strong>@connection</strong></h5>
+                                            </div>
+                                        </div>
+                                        <div class="position-absolute" style="bottom: 0;">
+                                            <div class="w-100 ps-1 pb-2">
+                                                <div class="col">
+                                                    <span class="badge rounded-pill bg-success">ONLINE</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    @foreach (var connection in Model.ExternalConnections)
+                    {
+                        <div class="card border rounded-0 mb-3">
+                            <div class="d-flex  g-0">
+                                <div class="col-md-2 d-flex  justify-content-center align-items-center bg-info"
+                                 style="height: 131px;">
+                                    <img src="~/assets/connection-64.png"
+                                     class=""
+                                     height="64"
+                                     alt=""
+                                     loading="lazy" />
+
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="card-body px-3 pt-2">
+                                        <h6 class="text-uppercase text-muted">External Connection</h6>
+                                        <div class="row">
+                                            <div class="col">
+                                                <h5 class="w-100 mb-1"><strong>@connection</strong></h5>
+                                            </div>
+                                        </div>
+                                        <div class="position-absolute" style="bottom: 0;">
+                                            <div class="w-100 ps-1 pb-2">
+                                                <div class="col">
+                                                    <span class="badge rounded-pill bg-success">ONLINE</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+        <!-- Tabs content-->
+    </section>
+
+
+</div>

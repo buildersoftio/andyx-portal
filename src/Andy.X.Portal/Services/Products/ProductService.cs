@@ -1,4 +1,5 @@
-﻿using Andy.X.Portal.Extensions;
+﻿using Andy.X.Portal.Configurations;
+using Andy.X.Portal.Extensions;
 using Andy.X.Portal.Models.Products;
 using Andy.X.Portal.Services.Tenants;
 using Microsoft.Extensions.Logging;
@@ -12,11 +13,13 @@ namespace Andy.X.Portal.Services.Products
     {
         private readonly ILogger<ProductService> logger;
         private readonly TenantService tenantService;
+        private readonly XNodeConfiguration xNodeConfiguration;
 
-        public ProductService(ILogger<ProductService> logger, TenantService tenantService)
+        public ProductService(ILogger<ProductService> logger, TenantService tenantService, XNodeConfiguration xNodeConfiguration)
         {
             this.logger = logger;
             this.tenantService = tenantService;
+            this.xNodeConfiguration = xNodeConfiguration;
         }
 
         public ProductListViewModel GetProductListViewModel()
@@ -29,8 +32,8 @@ namespace Andy.X.Portal.Services.Products
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Add("x-called-by", $"Andy X Portal");
 
-                string request = $"http://localhost:9001/api/v1/tenants/{tenant}/products";
-                client.AddBasicAuthorizationHeader("admin", "admin");
+                string request = $"{xNodeConfiguration.ServiceUrl}/api/v1/tenants/{tenant}/products";
+                client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
 
                 HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
                 string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -46,5 +49,28 @@ namespace Andy.X.Portal.Services.Products
 
             return products;
         }
+
+        public ProductDetailsViewModel GetProductDetailsViewModel(string tenant, string product)
+        {
+            var productDetails = new ProductDetailsViewModel();
+
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("x-called-by", $"Andy X Portal");
+
+            string request = $"{xNodeConfiguration.ServiceUrl}/api/v1/tenants/{tenant}/products/{product}";
+            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+
+            HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
+            string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
+            if (httpResponseMessage.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                productDetails = JsonConvert.DeserializeObject<ProductDetailsViewModel>(content);
+            }
+            productDetails.Tenant = tenant;
+
+            return productDetails;
+        }
+
     }
 }

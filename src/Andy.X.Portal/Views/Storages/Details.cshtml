@@ -32,26 +32,26 @@
 
     <div class="row mb-5 mt-5">
         <div class="col">
-            <div class="shadow-2 p-4">
+            <div class="border p-4">
                 <p class="text-uppercase caption text-muted">Agents Max Connection</p>
                 <p class="subheader"><strong>@Model.AgentMaxNumber</strong></p>
             </div>
         </div>
         <div class="col">
-            <div class="shadow-2 p-4">
+            <div class="border p-4">
                 <p class="text-uppercase caption text-muted">Agents Connected</p>
                 <p class="subheader"><strong>@Model.Agents.Count()</strong></p>
             </div>
         </div>
         <div class="col">
-            <div class=" shadow-2 p-4">
+            <div class=" border p-4">
                 <p class="text-uppercase caption text-muted">Memory Consumption</p>
                 <p class="subheader"><strong>n/a GB</strong></p>
             </div>
         </div>
     </div>
 
-    <section>
+    <section class="border">
 
         <!-- Tabs navs -->
         <ul class="nav nav-tabs nav-fill mb-3" id="ex-2" role="tablist">
@@ -76,34 +76,40 @@
         </ul>
         <!-- Tabs navs -->
         <!-- Tabs content-->
-        <div class="tab-content" id="ex-2-content">
+        <div class="tab-content mx-3" id="ex-2-content">
             <div class="tab-pane fade show active"
                  id="ex-2-tabs-1"
                  role="tabpanel"
                  aria-labelledby="pills-1-tab">
-                <div class="form-outline m-4">
-                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.StorageId">
-                    <label class="form-label" for="formControlLg">ID</label>
+
+                <p class="text-uppercase">ID</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.StorageId
                 </div>
-                <div class="form-outline m-4">
-                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.StorageName">
-                    <label class="form-label" for="formControlLg">NAME</label>
+
+                <p class="text-uppercase">NAME</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.StorageName
                 </div>
-                <div class="form-outline m-4">
-                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.StorageStatus.ToString()">
-                    <label class="form-label" for="formControlLg">STATUS</label>
+
+                <p class="text-uppercase">STATUS</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.StorageStatus.ToString()
                 </div>
-                <div class="form-outline m-4">
-                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.IsLoadBalanced.ToString()">
-                    <label class="form-label" for="formControlLg">IS LOAD BALANCED</label>
+
+                <p class="text-uppercase">IS LOAD BALANCED</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.IsLoadBalanced.ToString()
                 </div>
-                <div class="form-outline m-4">
-                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.AgentMaxNumber">
-                    <label class="form-label" for="formControlLg">AGENT MAX NUMBER</label>
+
+                <p class="text-uppercase">AGENT MAX NUMBER</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.AgentMaxNumber
                 </div>
-                <div class="form-outline m-4">
-                    <input type="text" id="formControlLg" class="form-control form-control-lg" readonly value="@Model.AgentMinNumber">
-                    <label class="form-label" for="formControlLg">AGENT MIN NUMBER</label>
+
+                <p class="text-uppercase">AGENT MIN NUMBER</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.AgentMinNumber
                 </div>
 
             </div>
@@ -111,7 +117,7 @@
                 <div class="container mt-5">
                     @foreach (var agent in Model.Agents.Values)
                     {
-                        <div class="card border shadow-1 rounded-0 mb-3">
+                        <div class="card border rounded-0 mb-3">
                             <div class="d-flex  g-0">
                                 <div class="col-md-2 d-flex  justify-content-center align-items-center bg-light"
                                  style="height: 131px;">

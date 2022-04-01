@@ -1,4 +1,5 @@
-﻿using Andy.X.Portal.Extensions;
+﻿using Andy.X.Portal.Configurations;
+using Andy.X.Portal.Extensions;
 using Andy.X.Portal.Models.Storages;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -10,10 +11,12 @@ namespace Andy.X.Portal.Services.Storages
     public class StorageService
     {
         private readonly ILogger<StorageService> logger;
+        private readonly XNodeConfiguration xNodeConfiguration;
 
-        public StorageService(ILogger<StorageService> logger)
+        public StorageService(ILogger<StorageService> logger, XNodeConfiguration xNodeConfiguration)
         {
             this.logger = logger;
+            this.xNodeConfiguration = xNodeConfiguration;
         }
 
         public StorageListViewModel GetStorageList()
@@ -23,10 +26,8 @@ namespace Andy.X.Portal.Services.Storages
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("x-called-by", $"Andy X Portal");
 
-            string request = $"http://localhost:9001/api/v1/storages";
-
-            // Move authorization as a seperate service
-            client.AddBasicAuthorizationHeader("admin", "admin");
+            string request = $"{xNodeConfiguration.ServiceUrl}/api/v1/storages";
+            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -46,8 +47,8 @@ namespace Andy.X.Portal.Services.Storages
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("x-called-by", $"Andy X Portal");
 
-            string request = $"http://localhost:9001/api/v1/storages/{storageDetails}";
-            client.AddBasicAuthorizationHeader("admin", "admin");
+            string request = $"{xNodeConfiguration.ServiceUrl}/api/v1/storages/{storageDetails}";
+            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
