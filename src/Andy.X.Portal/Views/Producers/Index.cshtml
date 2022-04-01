@@ -13,14 +13,20 @@
 
 
 <div class="container mt-5">
-    @foreach(var producer in Model.Producers)
+    @if (Model.Producers.Count == 0)
+    {
+        <div class="alert alert-warning" role="alert">
+            <center>There is no <strong>Producer</strong> connected at the moment!</center>
+        </div>
+    }
+    @foreach (var producer in Model.Producers)
     {
         <div class="card border rounded-0 mb-3">
             <div class="d-flex  g-0">
                 <div class="col-md-2 d-flex  justify-content-center align-items-center bg-light"
                  style="height: 131px;">
                     <img src="~/assets/producer-128.png"
-                      height="70"
+                     height="70"
                      alt=""
                      loading="lazy" />
 

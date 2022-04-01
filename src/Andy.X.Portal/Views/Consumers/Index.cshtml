@@ -12,7 +12,13 @@
 </div>
 
 <div class="container mt-5">
-    @foreach(var consumer in Model.Consumers)
+    @if (Model.Consumers.Count == 0)
+    {
+    <div class="alert alert-warning" role="alert">
+        <center>There is no <strong>Consumer</strong> connected at the moment!</center>
+    </div>
+    }
+    @foreach (var consumer in Model.Consumers)
     {
         <div class="card border shadow-1 rounded-0 mb-3">
             <div class="d-flex  g-0">
