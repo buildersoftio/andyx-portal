@@ -1,0 +1,194 @@
+﻿@using Andy.X.Portal.Models.Components
+@model ComponentDetailsViewModel
+@{
+    ViewData["Title"] = @Model.Name;
+}
+
+<div class="border-bottom" style="height:30px" aria-label="breadcrumb">
+    <ol class="breadcrumb ms-3 p-1">
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Products" asp-action="Index">PRODUCTS</a></li>
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Products" asp-action="Details" asp-route-tenant="@Model.Tenant" asp-route-id="@Model.Product">@Model.Product</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+    </ol>
+</div>
+
+<div class="container mt-5">
+    <h6 class="text-uppercase text-muted">Component</h6>
+    <div class="row">
+        <p class="col-auto header">@Model.Product / <strong>@Model.Name</strong></p>
+        <div class="col-auto">
+            <p><span class="badge subtitle rounded-pill bg-success">ONLINE</span></p>
+        </div>
+    </div>
+
+    <div class="row mb-5 mt-5">
+        <div class="col">
+            <div class="border p-4">
+                <p class="text-uppercase caption text-muted">Overview</p>
+
+                <p class="text-uppercase">Tenant</p>
+                <div class="alert alert-light" role="alert">
+                    @Model.Tenant
+                </div>
+                <p class="text-uppercase">Product</p>
+                <div class="alert alert-light" role="alert">
+                    @Model.Product
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="border">
+
+        <!-- Tabs navs -->
+        <ul class="nav nav-tabs nav-fill mb-3" id="ex-2" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active"
+                   id="ex-2-tab-1"
+                   data-mdb-toggle="pill"
+                   href="#ex-2-tabs-1"
+                   role="tab"
+                   aria-controls="pills-1"
+                   aria-selected="true">Topics</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link"
+                   id="ex-2-tab-2"
+                   data-mdb-toggle="pill"
+                   href="#ex-2-tabs-2"
+                   role="tab"
+                   aria-controls="pills-2"
+                   aria-selected="false">Settings</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link"
+                   id="ex-2-tab-3"
+                   data-mdb-toggle="pill"
+                   href="#ex-2-tabs-3"
+                   role="tab"
+                   aria-controls="pills-3"
+                   aria-selected="false">Policies</a>
+            </li>
+        </ul>
+        <!-- Tabs navs -->
+        <!-- Tabs content-->
+        <div class="tab-content mx-3" id="ex-2-content">
+            <div class="tab-pane fade show active"
+                 id="ex-2-tabs-1"
+                 role="tabpanel"
+                 aria-labelledby="pills-1-tab">
+
+                <h6 class="text-uppercase text-muted  mt-5">Topics</h6>
+                @foreach (var topic in Model.Topics.Values)
+                {
+                    <div class="card border rounded-0 mb-3">
+                        <div class="d-flex  g-0">
+                            <div class="col-md-2 d-flex  justify-content-center align-items-center bg-light"
+                             style="height: 131px;">
+                                <img src="~/assets/queue-100.png"
+                                 height="70"
+                                 alt=""
+                                 loading="lazy" />
+
+                            </div>
+
+                            <div class="col-md-8">
+                                <div class="card-body px-3 pt-2">
+                                    <h6 class="text-uppercase text-muted">Topic</h6>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5 class="w-100 mb-3"><strong>@topic.Name</strong></h5>
+                                        </div>
+                                        <div class="col" style="text-align: right">
+                                            <a class="btn btn-light" type="button" asp-area="" asp-controller="Components" asp-action="Details" asp-route-tenant="@Model.Tenant" asp-route-product="@Model.Name" asp-route-id="@topic.Name">View</a>
+                                        </div>
+                                    </div>
+                                    <div class="position-absolute" style="bottom: 0;">
+                                        <div class="w-100 ps-1 pb-2">
+                                            <div class="col">
+                                                <span class="badge rounded-pill bg-primary">@topic.Id</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <h6 class="text-uppercase text-muted  mt-5">Count @Model.Topics.Count</h6>
+
+            </div>
+            <div class="tab-pane fade" id="ex-2-tabs-2" role="tabpanel" aria-labelledby="pills-2-tab">
+                <h6 class="text-uppercase text-muted  mt-5">Overview</h6>
+
+                <p class="text-uppercase">Allow Schema Validation</p>
+                <div class="alert alert-light" role="alert">
+                    @Model.Settings.AllowSchemaValidation.ToString()
+                </div>
+                <p class="text-uppercase">Allow Topic Creation</p>
+                <div class="alert alert-light" role="alert">
+                    @Model.Settings.AllowTopicCreation.ToString()
+                </div>
+                <p class="text-uppercase">Enable Authorization</p>
+                <div class="alert alert-light" role="alert">
+                    @Model.Settings.EnableAuthorization.ToString()
+                </div>
+
+                <h6 class="text-uppercase text-muted  mt-5">Tokens</h6>
+                @if (Model.Settings.Tokens.Count() == 0)
+                {
+                    <div class="alert alert-warning" role="alert">
+                        <center>There is no <strong>Token</strong> created at the moment!</center>
+                    </div>
+                }
+                else
+                {
+                    <p class="note note-warning">
+                        <strong>Access Tokens: </strong>
+                        To access <strong>Component Tokens</strong> and link to your application, request it from <strong>Andy X CLI</strong>. Accessing Tokens is not possible from Andy X Portal.
+                    </p>
+                }
+                @foreach (var token in Model.Settings.Tokens)
+                {
+                    <div class="alert alert-light" role="alert">
+                        <p class="text-uppercase">Token</p>
+                        @if (@token.Name != "")
+                        {
+                            <p class="subtitle font-weight-bold">@token.Name</p>
+                        }
+                        else
+                        {
+                            <p class="subtitle font-weight-bold">default</p>
+                        }
+                        <p class="base">Expire Date: @token.ExpireDate</p>
+                        <p class="base">Can consume: @token.CanConsume</p>
+                        <p class="base">Can produce: @token.CanProduce</p>
+                        <p class="base">Description: @token.Description</p>
+                    </div>
+                }
+
+            </div>
+            <div class="tab-pane fade" id="ex-2-tabs-3" role="tabpanel" aria-labelledby="pills-3-tab">
+                <h6 class="text-uppercase text-muted  mt-5">Component Retention Policy</h6>
+
+                <p class="text-uppercase">Name</p>
+                <div class="alert alert-light" role="alert">
+                    @Model.Settings.RetentionPolicy.Name
+                </div>
+                <p class="text-uppercase">Retention Time in Minutes</p>
+                <div class="alert alert-light" role="alert">
+                    @Model.Settings.RetentionPolicy.RetentionTimeInMinutes.ToString()
+                </div>
+                <p class="note note-warning">
+                    <strong>Retention Time in Minutes: </strong>
+                    <strong>-1</strong> value means messages will stay always in the cluster.
+                </p>
+            </div>
+        </div>
+        <!-- Tabs content-->
+    </section>
+
+
+</div>
+

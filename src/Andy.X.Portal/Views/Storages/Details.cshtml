@@ -17,7 +17,14 @@
     <div class="row">
         <p class="col-auto header"><strong>@Model.StorageName</strong></p>
         <div class="col-auto">
-            <p><span class="badge subtitle rounded-pill bg-success">ONLINE</span></p>
+            @if (Model.Agents.Count() != 0)
+            {
+                <p><span class="badge subtitle rounded-pill bg-success">ONLINE</span></p>
+            }
+            else
+            {
+                <p><span class="badge subtitle rounded-pill bg-secondary">OFFLINE</span></p>
+            }
         </div>
         <div class="col-auto">
             <p>
@@ -46,9 +53,37 @@
         <div class="col">
             <div class=" border p-4">
                 <p class="text-uppercase caption text-muted">Memory Consumption</p>
-                <p class="subheader"><strong>n/a GB</strong></p>
+                <p class="subheader"><strong>0 Bytes</strong></p>
             </div>
         </div>
+    </div>
+    <div class="row mb-5 mt-5">
+
+        <div class="col">
+            <div class="border p-4">
+                <p class="text-uppercase caption text-muted">In Rate</p>
+                <p class="subheader"><strong>0.00</strong></p>
+            </div>
+        </div>
+        <div class="col">
+            <div class=" border p-4">
+                <p class="text-uppercase caption text-muted">Out Rate</p>
+                <p class="subheader"><strong>0.00</strong></p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="border p-4">
+                <p class="text-uppercase caption text-muted">In throughput</p>
+                <p class="subheader"><strong>0 Bytes</strong></p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="border p-4">
+                <p class="text-uppercase caption text-muted">Out throughput</p>
+                <p class="subheader"><strong>0 Bytes</strong></p>
+            </div>
+        </div>
+
     </div>
 
     <section class="border">

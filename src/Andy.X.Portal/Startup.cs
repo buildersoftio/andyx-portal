@@ -1,4 +1,5 @@
 using Andy.X.Portal.Configurations;
+using Andy.X.Portal.Services.Components;
 using Andy.X.Portal.Services.Consumers;
 using Andy.X.Portal.Services.Producers;
 using Andy.X.Portal.Services.Products;
@@ -33,6 +34,7 @@ namespace Andy.X.Portal
             services.AddSingleton<StorageService>();
             services.AddSingleton<TenantService>();
             services.AddSingleton<ProductService>();
+            services.AddSingleton<ComponentService>();
             services.AddSingleton<ProducerService>();
             services.AddSingleton<ConsumerService>();
         }
