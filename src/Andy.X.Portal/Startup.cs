@@ -5,6 +5,7 @@ using Andy.X.Portal.Services.Producers;
 using Andy.X.Portal.Services.Products;
 using Andy.X.Portal.Services.Storages;
 using Andy.X.Portal.Services.Tenants;
+using Andy.X.Portal.Services.Topics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -35,6 +36,7 @@ namespace Andy.X.Portal
             services.AddSingleton<TenantService>();
             services.AddSingleton<ProductService>();
             services.AddSingleton<ComponentService>();
+            services.AddSingleton<TopicService>();
             services.AddSingleton<ProducerService>();
             services.AddSingleton<ConsumerService>();
         }

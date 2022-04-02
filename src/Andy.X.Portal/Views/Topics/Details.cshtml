@@ -1,0 +1,96 @@
+﻿@using Andy.X.Portal.Models.Topics
+@model TopicDetailsViewModel
+@{
+    ViewData["Title"] = @Model.Name;
+}
+
+<div class="border-bottom" style="height:30px" aria-label="breadcrumb">
+    <ol class="breadcrumb ms-3 p-1">
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Products" asp-action="Index">PRODUCTS</a></li>
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Products" asp-action="Details" asp-route-tenant="@Model.Tenant" asp-route-id="@Model.Product">@Model.Product</a></li>
+        <li class="breadcrumb-item"><a asp-area="" asp-controller="Components" asp-action="Details" asp-route-tenant="@Model.Tenant" asp-route-product="@Model.Product" asp-route-id="@Model.Component">@Model.Component</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+    </ol>
+</div>
+
+<div class="container mt-5">
+    <h6 class="text-uppercase text-muted">Topic</h6>
+    <div class="row">
+        <p class="col-auto header"><strong>@Model.Name</strong></p>
+        <div class="col-auto">
+            @if (Model.TopicSettings.IsPersistent == true)
+            {
+                <p>
+                    <span class="badge subtitle rounded-pill bg-info"
+                      data-mdb-toggle="popover"
+                      title="PERSISTENT"
+                      data-mdb-content="Messages are stored in the topic, and they can be consumed later.">PERSISTENT</span>
+                </p>
+            }
+            else
+            {
+                <p>
+                    <span class="badge subtitle rounded-pill bg-secondary"
+                      data-mdb-toggle="popover"
+                      title="NON PERSISTENT"
+                      data-mdb-content="Messages are not stored in the topic, they can not be consumed later. e.g., this type of topics should be used only for realtime/notifications">NON PERSISTENT</span>
+                </p>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-5 mt-5">
+        <div class="col">
+            <div class="border p-4">
+                <p class="text-uppercase caption text-muted">Overview</p>
+
+                <p class="text-uppercase">Tenant</p>
+                <div class="alert alert-light" role="alert">
+                    @Model.Tenant
+                </div>
+                <p class="text-uppercase">Product</p>
+                <div class="alert alert-light" role="alert">
+                    @Model.Product
+                </div>
+                <p class="text-uppercase">Component</p>
+                <div class="alert alert-light" role="alert">
+                    @Model.Component
+                </div>
+                <p class="text-uppercase">Location</p>
+                <div class="alert alert-light font-weight-bold" role="alert">
+                    @Model.Tenant / @Model.Product / @Model.Component / @Model.Name
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5 mt-5">
+
+        <div class="col">
+            <div class="border p-4">
+                <p class="text-uppercase caption text-muted">In Rate</p>
+                <p class="subheader"><strong>0.00</strong></p>
+            </div>
+        </div>
+        <div class="col">
+            <div class=" border p-4">
+                <p class="text-uppercase caption text-muted">Out Rate</p>
+                <p class="subheader"><strong>0.00</strong></p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="border p-4">
+                <p class="text-uppercase caption text-muted">In throughput</p>
+                <p class="subheader"><strong>0 Bytes</strong></p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="border p-4">
+                <p class="text-uppercase caption text-muted">Out throughput</p>
+                <p class="subheader"><strong>0 Bytes</strong></p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
