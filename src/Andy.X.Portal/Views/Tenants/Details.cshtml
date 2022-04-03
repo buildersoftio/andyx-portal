@@ -132,10 +132,63 @@
 
             </div>
             <div class="tab-pane fade" id="ex-2-tabs-2" role="tabpanel" aria-labelledby="pills-2-tab">
-                to be implemented
+                <p class="text-uppercase">Enable Authorization</p>
+                <div class="alert alert-light" role="alert">
+                    @Model.Settings.EnableAuthorization.ToString()
+                </div>
+
+                <h6 class="text-uppercase text-muted  mt-5">Tokens</h6>
+                @if (Model.Settings.Tokens.Count() == 0)
+                {
+                    <div class="alert alert-warning" role="alert">
+                        <center>There is no <strong>Token</strong> created at the moment!</center>
+                    </div>
+                }
+                else
+                {
+                    <p class="note note-warning">
+                        <strong>Access Tokens: </strong>
+                        To access <strong>Tenant Tokens</strong> and link to your application, request it from <strong>Andy X CLI</strong>. Accessing Tokens is not possible from Andy X Portal.
+                    </p>
+                }
+                @foreach (var token in Model.Settings.Tokens)
+                {
+                    <div class="alert alert-light" role="alert">
+                        <p class="text-uppercase">Token</p>
+                        @if (@token.IssuedFor != "")
+                        {
+                            <p class="subtitle font-weight-bold">@token.IssuedFor</p>
+                        }
+                        else
+                        {
+                            <p class="subtitle font-weight-bold">default</p>
+                        }
+                        <p class="base">Issued Date: @token.IssuedDate</p>
+                        <p class="base">Expire Date: @token.ExpireDate</p>
+                    </div>
+                }
             </div>
             <div class="tab-pane fade" id="ex-2-tabs-3" role="tabpanel" aria-labelledby="pills-3-tab">
-                to be implemented
+                <h6 class="text-uppercase text-muted  mt-5">Certificate</h6>
+
+
+                <p class="text-uppercase">Certificate Path</p>
+                @if (@Model.Settings.CertificatePath != null)
+                {
+                    <div class="alert alert-light base" role="alert">
+                        @Model.Settings.CertificatePath
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-light base" role="alert">
+                        NO CERTIFICATE LINKED
+                    </div>
+                }
+                <p class="note note-warning">
+                    <strong>Linking certificate: </strong>
+                    Linking certificate is possible by Andy X CLI or tenants_config.json and it requires restarting the cluster.
+                </p>
             </div>
         </div>
         <!-- Tabs content-->

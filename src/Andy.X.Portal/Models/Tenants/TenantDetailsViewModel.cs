@@ -1,4 +1,7 @@
-﻿namespace Andy.X.Portal.Models.Tenants
+﻿using System;
+using System.Collections.Generic;
+
+namespace Andy.X.Portal.Models.Tenants
 {
     public class TenantDetailsViewModel
     {
@@ -19,6 +22,8 @@
         public TenantLogging Logging { get; set; }
 
         public bool EnableAuthorization { get; set; }
+        public List<TenantToken> Tokens { get; set; }
+
 
         // Split tenants by certificates will not be possible with version two
         public string CertificatePath { get; set; }
@@ -29,6 +34,8 @@
             EnableEncryption = false;
 
             EnableAuthorization = false;
+            Tokens = new List<TenantToken>();
+
 
             EnableGeoReplication = false;
             Logging = TenantLogging.ERROR_ONLY;
@@ -40,5 +47,14 @@
         INFORMATION_ONLY,
         WARNING_ONLY,
         ERROR_ONLY,
+    }
+
+    public class TenantToken
+    {
+        public string Token { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime ExpireDate { get; set; }
+        public string IssuedFor { get; set; }
+        public DateTime IssuedDate { get; set; }
     }
 }
