@@ -5,7 +5,7 @@ Andy X is an open-source distributed streaming platform designed to deliver the 
 
 ## Get Started
 
-Follow the [Getting Started](https://andyx.azurewebsites.net/) instructions how to run Andy X.
+Follow the [Getting Started](https://buildersoftdev.azurewebsites.net/andyx) instructions how to run Andy X.
 
 For local development and testing, you can run Andy X within a Docker container, for more info click [here](https://hub.docker.com/u/buildersoftdev)
 
@@ -22,7 +22,7 @@ Security issues and bugs should be reported privately, via email, en.buildersoft
 
 These are some other repos for related projects:
 
-* [Andy X Dashboard](https://github.com/buildersoftdev/andyx) - Andy X Node
+* [Andy X](https://github.com/buildersoftdev/andyx) - Andy X Node
 * [Andy X Cli](https://github.com/buildersoftdev/andyx-cli) - Manage all resources of Andy X
 
 ## Deploying Andy X with docker-compose
