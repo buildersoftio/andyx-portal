@@ -62,25 +62,25 @@
         <div class="col">
             <div class="border p-4">
                 <p class="text-uppercase caption text-muted">In Rate</p>
-                <p class="subheader"><strong>0.00</strong></p>
+                <p class="subheader"><strong>@Model.StorageMetrics.InRate</strong></p>
             </div>
         </div>
         <div class="col">
             <div class=" border p-4">
                 <p class="text-uppercase caption text-muted">Out Rate</p>
-                <p class="subheader"><strong>0.00</strong></p>
+                <p class="subheader"><strong>@Model.StorageMetrics.OutRate</strong></p>
             </div>
         </div>
         <div class="col">
             <div class="border p-4">
                 <p class="text-uppercase caption text-muted">In throughput</p>
-                <p class="subheader"><strong>0 Bytes</strong></p>
+                <p class="subheader"><strong>@Model.StorageMetrics.InThroughput Bytes</strong></p>
             </div>
         </div>
         <div class="col">
             <div class="border p-4">
                 <p class="text-uppercase caption text-muted">Out throughput</p>
-                <p class="subheader"><strong>0 Bytes</strong></p>
+                <p class="subheader"><strong>@Model.StorageMetrics.OutThroughput Bytes</strong></p>
             </div>
         </div>
 
