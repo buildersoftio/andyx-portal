@@ -14,6 +14,10 @@ namespace Andy.X.Portal.Models.Producers
         public Guid Id { get; set; }
         public string ProducerName { get; set; }
 
+        public DateTime ConnectedDate { get; set; }
+        public long CountMessagesProducedSinceConnected { get; set; }
+
+
         public ProducerDetailsViewModel()
         {
             IsLocal = true;

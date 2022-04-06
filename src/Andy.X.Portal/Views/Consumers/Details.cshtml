@@ -29,6 +29,29 @@
     </div>
     <p class="col-auto subheader">@Model.Tenant / @Model.Product / @Model.Component / @Model.Topic / <strong>@Model.ConsumerName</strong></p>
 
+    <div class="row mb-5 mt-5">
+
+        <div class="col">
+            <div class="border p-4">
+                <p class="text-uppercase caption text-muted">Number of messages consumed by consumer from last connection</p>
+                <p class="subtitle"><strong>@Model.CountMessagesConsumedSinceConnected</strong></p>
+            </div>
+        </div>
+        <div class="col">
+            <div class=" border p-4">
+                <p class="text-uppercase caption text-muted">Number of messages acknowledged from last connection</p>
+                <p class="subtitle"><strong>@Model.CountMessagesAcknowledgedSinceConnected</strong></p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="border p-4">
+                <p class="text-uppercase caption text-muted">Number of messages unacknowledged from last connection</p>
+                <p class="subtitle"><strong>@Model.CountMessagesUnacknowledgedSinceConnected</strong></p>
+            </div>
+        </div>
+    </div>
+
+
     <section class="mt-5 border">
 
         <!-- Tabs navs -->
@@ -104,6 +127,11 @@
                 <p class="text-uppercase">Connected to this node</p>
                 <div class="alert alert-light base" role="alert">
                     @Model.IsLocal.ToString()
+                </div>
+
+                <p class="text-uppercase">Connection Date</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.ConnectedDate.ToString("yyyy-MM-dd HH:mm:ss")
                 </div>
 
             </div>

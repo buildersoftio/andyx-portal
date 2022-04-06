@@ -24,6 +24,22 @@
     <div class="row mb-5 mt-5">
         <div class="col">
             <div class="border p-4">
+                <p class="text-uppercase caption text-muted">Number of messages produced from last connection</p>
+                <p class="subheader"><strong>@Model.CountMessagesProducedSinceConnected</strong></p>
+            </div>
+        </div>
+        <div class="col">
+            <div class=" border p-4">
+                <p class="text-uppercase caption text-muted">Memory Consumption</p>
+                <p class="subheader"><strong>0 Bytes</strong></p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mb-5 mt-5">
+        <div class="col">
+            <div class="border p-4">
                 <p class="text-uppercase caption text-muted">Overview</p>
 
                 <p class="text-uppercase">Tenant</p>
@@ -55,6 +71,11 @@
                 <p class="text-uppercase">Connected to this node</p>
                 <div class="alert alert-light base" role="alert">
                     @Model.IsLocal.ToString()
+                </div>
+
+                <p class="text-uppercase">Connection Date</p>
+                <div class="alert alert-light base" role="alert">
+                    @Model.ConnectedDate.ToString("yyyy-MM-dd HH:mm:ss")
                 </div>
             </div>
         </div>
