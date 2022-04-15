@@ -32,9 +32,7 @@
                             <div class="col">
                                 <h5 class="w-100 mb-3"><strong>@tenant</strong></h5>
                             </div>
-                            <div class="col" style="text-align: right">
-                                <a class="btn btn-light" type="button" asp-area="" asp-controller="Tenants" asp-action="Details" asp-route-id="@tenant">View</a>
-                            </div>
+
                         </div>
                         <div class="position-absolute" style="bottom: 0;">
                             <div class="w-100 ps-1 pb-2">
@@ -44,6 +42,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col p-5 d-grid gap-2 d-md-flex align-items-center justify-content-md-end">
+                    <a class="btn btn-light" type="button" asp-area="" asp-controller="Tenants" asp-action="Details" asp-route-id="@tenant">View</a>
                 </div>
             </div>
         </div>

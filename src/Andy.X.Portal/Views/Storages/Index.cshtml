@@ -13,7 +13,7 @@
 </div>
 
 <div class="container mt-5">
-    @foreach  (var storage in Model.StorageNames)
+    @foreach (var storage in Model.StorageNames)
     {
         <div class="card border rounded-0 mb-3">
             <div class="d-flex  g-0">
@@ -26,16 +26,12 @@
                      loading="lazy" />
 
                 </div>
-                @*href="/AreaName/ControllerName/ActionName"*@
                 <div class="col-md-8">
                     <div class="card-body px-3 pt-2">
                         <h6 class="text-uppercase text-muted">Storage</h6>
                         <div class="row">
                             <div class="col">
                                 <h5 class="w-100 mb-3"><strong>@storage</strong></h5>
-                            </div>
-                            <div class="col" style="text-align: right">
-                                <a class="btn btn-light" type="button" asp-area="" asp-controller="Storages" asp-action="Details" asp-route-id="@storage">View</a>
                             </div>
                         </div>
                         <div class="position-absolute" style="bottom: 0;">
@@ -46,6 +42,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col p-5 d-grid gap-2 d-md-flex align-items-center justify-content-md-end">
+                    <a class="btn btn-light" type="button" asp-area="" asp-controller="Storages" asp-action="Details" asp-route-id="@storage">View</a>
                 </div>
             </div>
         </div>

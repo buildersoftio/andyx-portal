@@ -12,7 +12,7 @@
 </div>
 
 <div class="container mt-5">
-    @foreach(var product in Model.Products)
+    @foreach (var product in Model.Products)
     {
         <div class="card border rounded-0 mb-3">
             <div class="d-flex  g-0">
@@ -32,9 +32,6 @@
                             <div class="col">
                                 <h5 class="w-100 mb-3"><strong>@product.Tenant / @product.Product</strong></h5>
                             </div>
-                            <div class="col" style="text-align: right">
-                                <a class="btn btn-light" type="button" asp-area="" asp-controller="Products" asp-action="Details" asp-route-tenant="@product.Tenant" asp-route-id="@product.Product">View</a>
-                            </div>
                         </div>
                         <div class="position-absolute" style="bottom: 0;">
                             <div class="w-100 ps-1 pb-2">
@@ -46,6 +43,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col p-5 d-grid gap-2 d-md-flex align-items-center justify-content-md-end">
+                    <a class="btn btn-light" type="button" asp-area="" asp-controller="Products" asp-action="Details" asp-route-tenant="@product.Tenant" asp-route-id="@product.Product">View</a>
                 </div>
             </div>
         </div>
