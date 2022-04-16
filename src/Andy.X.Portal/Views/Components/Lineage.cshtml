@@ -42,7 +42,7 @@
                         {
                             <ul class="navbar-nav flex-grow-1 text-center">
                                 <li class="nav-item">
-                                    <button type="button" class="btn btn-outline-secondary w-100 btn-lg mb-1" data-mdb-toggle="modal" data-mdb-target="#@producer.Tenant@producer.Product@producer.Component@producer.Topic@producer.ProducerName">@producer.ProducerName</button>
+                                    <button type="button" class="btn btn-outline-secondary w-100 btn-lg mb-1" data-mdb-toggle="modal" data-mdb-target="#producer-@producer.Tenant@producer.Product@producer.Component@producer.Topic@producer.ProducerName">@producer.ProducerName</button>
                                 </li>
                             </ul>
 
@@ -50,7 +50,7 @@
 
                             <!-- Modal -->
                             <div class="modal fade"
-                     id="@producer.Tenant@producer.Product@producer.Component@producer.Topic@producer.ProducerName"
+                     id="producer-@producer.Tenant@producer.Product@producer.Component@producer.Topic@producer.ProducerName"
                      tabindex="-1"
                      role="dialog"
                      aria-labelledby="exampleModalLabel"
@@ -58,7 +58,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">@producer.ProducerName</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel"><strong>@producer.ProducerName</strong> Producer</h5>
                                             <button type="button"
                                         class="btn-close"
                                         data-mdb-dismiss="modal"
@@ -138,7 +138,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">@Model.StreamLineages[i].Topic</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel"><strong>@Model.StreamLineages[i].Topic</strong> Topic</h5>
                                     <button type="button"
                                         class="btn-close"
                                         data-mdb-dismiss="modal"
@@ -195,7 +195,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">@consumer.ConsumerName</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel"><strong>@consumer.ConsumerName</strong> Consumer</h5>
                                             <button type="button"
                                         class="btn-close"
                                         data-mdb-dismiss="modal"
