@@ -26,13 +26,13 @@
             <p class="text-uppercase caption text-muted">Stream @(i+1): <strong>@Model.StreamLineages[i].TopicPhysicalPath</strong></p>
 
             <div class="row mb-2">
-                <div class="col  d-flex align-items-center">
+                <div class="col justify-content-center align-center flex-nowrap">
 
                     @if (Model.StreamLineages[i].Producers.Count() == 0)
                     {
                         <ul class="navbar-nav flex-grow-1 text-center">
                             <li>
-                                <button type="button" class="btn btn-outline-secondary w-100 btn-lg" disabled>NO PRODUCERS</button>
+                                <button type="button" class="btn btn-outline-secondary w-100 btn-lg mb-1" disabled>NO PRODUCERS</button>
                             </li>
                         </ul>
                     }
