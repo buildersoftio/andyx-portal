@@ -13,36 +13,58 @@
 
 <div class="container mt-5">
 
-
     <p class="note note-warning">
-        <strong>Note:</strong> Andy X Portal <strong>PREVIEW</strong> works only with Andy X v2.1.
-        @*<br />*@
+        Andy X Portal works only with Andy X v2.1.
         Please make sure that the Environment variable <strong>ANDYX_EXPOSE_CONFIG_ENDPOINTS</strong> is <strong>set</strong> at Andy X Node.
     </p>
 
-    <div class="row mb-5">
-        <div class="col">
-            <div class="border p-4">
-                <h6 class="text-uppercase text-muted">Total Storage</h6>
-                <h2><strong>n/a</strong></h2>
+    <div class="row">
+        <div class="col-md-4 mb-5">
+            <div class="card">
+                <img src="~/assets/andyx (1).jpg"
+                     class="card-img-top"
+                     alt="..." />
+                <div class="card-body">
+                    <h4 class="semibold mb-3">Storage</h4>
+                    <p class="mb-4">
+                        Manage storage configuration and check statuses all in one place.
+                    </p>
+                    <a asp-area="" asp-controller="Storages" asp-action="Index" class="btn btn-primary">View</a>
+                </div>
             </div>
         </div>
-        <div class="col">
-            <div class="border p-4">
-                <h6 class="text-uppercase text-muted">Total Nodes</h6>
-                <h2><strong>n/a</strong></h2>
+
+        <div class="col-md-4 mb-5">
+            <div class="card">
+                <img src="~/assets/andyx (2).jpg"
+                     class="card-img-top"
+                     height=auto
+                     width=auto
+                     alt="..." />
+                <div class="card-body">
+                    <h4 class="semibold mb-3">Tenant</h4>
+                    <p class="mb-4">
+                        Manage Tenants connected to this cluster, manage configurations and authorization foreach tenant.
+                    </p>
+                    <a asp-area="" asp-controller="Tenants" asp-action="Index" class="btn btn-primary">View</a>
+                </div>
             </div>
         </div>
-        <div class="col">
-            <div class=" border p-4">
-                <h6 class="text-uppercase text-muted">Total Topics</h6>
-                <h2><strong>n/a</strong></h2>
+
+        <div class="col-md-4 mb-5">
+            <div class="card">
+                <img src="~/assets/andyx (1).jpg"
+                     class="card-img-top"
+                     alt="..." />
+                <div class="card-body">
+                    <h4 class="semibold mb-3">Products</h4>
+                    <p class="mb-4">
+                        Andy X is ready for Data Mesh! Create Products and start developing in your one environment.
+                    </p>
+                    <a asp-area="" asp-controller="Products" asp-action="Index" class="btn btn-primary">View</a>
+                </div>
             </div>
         </div>
     </div>
-    <div>
-        <div class="border p-4" style="height:550px">
-            <h6 class="text-uppercase text-muted">Input and output</h6>
-        </div>
-    </div>
+
 </div>
