@@ -55,8 +55,9 @@ namespace Andy.X.Portal
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseAuthentication();
