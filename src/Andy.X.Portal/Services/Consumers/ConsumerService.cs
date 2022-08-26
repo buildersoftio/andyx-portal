@@ -24,7 +24,7 @@ namespace Andy.X.Portal.Services.Consumers
             ConsumerListViewModel consumerListViewModel = new ConsumerListViewModel();
 
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("x-called-by", $"Andy X Portal");
+            client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v1/consumers";
             client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
@@ -46,7 +46,7 @@ namespace Andy.X.Portal.Services.Consumers
             var consumerDetailsViewModel = new ConsumerDetailsViewModel();
 
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("x-called-by", $"Andy X Portal");
+            client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v1/consumers/{consumerName}";
             client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);

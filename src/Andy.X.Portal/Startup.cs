@@ -1,4 +1,5 @@
 using Andy.X.Portal.Configurations;
+using Andy.X.Portal.Services.Clusters;
 using Andy.X.Portal.Services.Components;
 using Andy.X.Portal.Services.Consumers;
 using Andy.X.Portal.Services.Producers;
@@ -32,6 +33,7 @@ namespace Andy.X.Portal
             Configuration.Bind("XNode", xNodeConfiguration);
             services.AddSingleton(xNodeConfiguration);
 
+            services.AddSingleton<ClusterService>();
             services.AddSingleton<StorageService>();
             services.AddSingleton<TenantService>();
             services.AddSingleton<ProductService>();

@@ -23,7 +23,7 @@ namespace Andy.X.Portal.Services.Topics
             var topicDetailsViewModel = new TopicDetailsViewModel();
 
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("x-called-by", $"Andy X Portal");
+            client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v1/tenants/{tenant}/products/{product}/components/{component}/topics/{topic}";
             client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);

@@ -24,7 +24,7 @@ namespace Andy.X.Portal.Services.Storages
             StorageListViewModel storageListViewModel = new StorageListViewModel();
 
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("x-called-by", $"Andy X Portal");
+            client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v1/storages";
             client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
@@ -45,7 +45,7 @@ namespace Andy.X.Portal.Services.Storages
             StorageDetailsViewModel storageDetailsViewModel = new StorageDetailsViewModel();
 
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("x-called-by", $"Andy X Portal");
+            client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v1/storages/{storageDetails}";
             client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);

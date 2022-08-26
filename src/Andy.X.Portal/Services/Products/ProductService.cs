@@ -30,7 +30,7 @@ namespace Andy.X.Portal.Services.Products
             foreach (var tenant in tenants.Tenants)
             {
                 HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Add("x-called-by", $"Andy X Portal");
+                client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
                 string request = $"{xNodeConfiguration.ServiceUrl}/api/v1/tenants/{tenant}/products";
                 client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
@@ -56,7 +56,7 @@ namespace Andy.X.Portal.Services.Products
 
 
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("x-called-by", $"Andy X Portal");
+            client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v1/tenants/{tenant}/products/{product}";
             client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);

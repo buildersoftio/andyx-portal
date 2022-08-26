@@ -26,7 +26,7 @@ namespace Andy.X.Portal.Services.Components
             var componentDetailsViewModel = new ComponentDetailsViewModel();
 
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("x-called-by", $"Andy X Portal");
+            client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v1/tenants/{tenant}/products/{product}/components/{componentName}";
             client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
@@ -48,7 +48,7 @@ namespace Andy.X.Portal.Services.Components
             var streamLineageView = new StreamLineageViewModel();
 
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("x-called-by", $"Andy X Portal");
+            client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v1/tenants/{tenant}/products/{product}/components/{componentName}/lineage";
             client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);

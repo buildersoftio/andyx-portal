@@ -16,6 +16,7 @@ namespace Andy.X.Portal.Controllers
         {
             return View(tenantService.GetTenantListViewModel());
         }
+
         public IActionResult Details(string id)
         {
             return View(tenantService.GetTenantDetailsViewModel(id));
