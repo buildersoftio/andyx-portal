@@ -24,7 +24,7 @@ namespace Andy.X.Portal.Services.Clusters
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
-            string request = $"{xNodeConfiguration.ServiceUrl}/api/v1/clusters";
+            string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/clusters";
             client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;

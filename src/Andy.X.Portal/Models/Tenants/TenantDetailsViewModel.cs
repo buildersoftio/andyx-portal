@@ -1,60 +1,84 @@
-﻿using System;
+﻿using Andy.X.Portal.Models.Products;
+using System;
 using System.Collections.Generic;
 
 namespace Andy.X.Portal.Models.Tenants
 {
     public class TenantDetailsViewModel
     {
+        public long Id { get; set; }
         public string Name { get; set; }
+
+        public bool IsActive { get; set; }
+
+        public DateTimeOffset? UpdatedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
+
+        public string UpdatedBy { get; set; }
+        public string CreatedBy { get; set; }
+
+
         public TenantSettings Settings { get; set; }
+        public List<Token> Tokens { get; set; }
+
+        public List<string> Products { get; set; }
+        public List<TenantRetention> TenantRetentions { get; set; }
 
         public TenantDetailsViewModel()
         {
             Settings = new TenantSettings();
+            Tokens = new List<Token>();
+            Products = new List<string>();
+            TenantRetentions = new List<TenantRetention>();
         }
     }
     public class TenantSettings
     {
-        public bool AllowProductCreation { get; set; }
-        public string DigitalSignature { get; set; }
-        public bool EnableEncryption { get; set; }
-        public bool EnableGeoReplication { get; set; }
-        public TenantLogging Logging { get; set; }
-
-        public bool EnableAuthorization { get; set; }
-        public List<TenantToken> Tokens { get; set; }
-
-
-        // Split tenants by certificates will not be possible with version two
-        public string CertificatePath { get; set; }
+        public bool IsProductAutomaticCreationAllowed { get; set; }
+        public bool IsEncryptionEnabled { get; set; }
+        public bool IsAuthorizationEnabled { get; set; }
 
         public TenantSettings()
         {
-            AllowProductCreation = true;
-            EnableEncryption = false;
-
-            EnableAuthorization = false;
-            Tokens = new List<TenantToken>();
-
-
-            EnableGeoReplication = false;
-            Logging = TenantLogging.ERROR_ONLY;
+            IsProductAutomaticCreationAllowed = false;
+            IsEncryptionEnabled = false;
+            IsAuthorizationEnabled = false;
         }
     }
-    public enum TenantLogging
+
+    public class Token
     {
-        ALL,
-        INFORMATION_ONLY,
-        WARNING_ONLY,
-        ERROR_ONLY,
+        public Guid Key { get; set; }
+        public string Secret { get; set; }
+        public string Description { get; set; }
+        public DateTimeOffset ExpireDate { get; set; }
+        public bool IsActive { get; set; }
+
+        public Token()
+        {
+            Key = Guid.Empty;
+            Secret = "*************************";
+        }
     }
 
-    public class TenantToken
+    public enum TenantTokenRole
     {
-        public string Token { get; set; }
-        public bool IsActive { get; set; }
-        public DateTime ExpireDate { get; set; }
-        public string IssuedFor { get; set; }
-        public DateTime IssuedDate { get; set; }
+        Produce,
+        Consume
+    }
+
+    public class TenantRetention
+    {
+        public long Id { get; set; }
+
+        public string Name { get; set; }
+        public RetentionType Type { get; set; }
+        public long TimeToLiveInMinutes { get; set; }
+    }
+
+    public enum RetentionType
+    {
+        SOFT_TTL,
+        HARD_TTL
     }
 }

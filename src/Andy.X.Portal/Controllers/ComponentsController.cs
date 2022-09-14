@@ -16,10 +16,5 @@ namespace Andy.X.Portal.Controllers
         {
             return View(componentService.GetComponentDetailsViewModel(tenant, product, id));
         }
-
-        public IActionResult Lineage(string tenant, string product, string id)
-        {
-            return View(componentService.GetStreamLineageViewModel(tenant, product, id));
-        }
     }
 }

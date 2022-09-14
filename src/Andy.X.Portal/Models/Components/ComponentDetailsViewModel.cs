@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Andy.X.Portal.Models.Tenants;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
@@ -9,74 +10,49 @@ namespace Andy.X.Portal.Models.Components
         public string Tenant { get; set; }
         public string Product { get; set; }
 
-        public Guid Id { get; set; }
+        public long Id { get; set; }
+
         public string Name { get; set; }
-        public ComponentSettings Settings { get; set; }
-        public ConcurrentDictionary<string, TopicInComponent> Topics { get; set; }
+        public string Description { get; set; }
+
+        public DateTimeOffset? UpdatedDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
+
+        public string UpdatedBy { get; set; }
+        public string CreatedBy { get; set; }
+
+        public List<string> Topics { get; set; }
+        public List<ComponentRetention> ComponentRetentions { get; set; }
+        public ComponentSettings ComponentSettings { get; set; }
+        public List<Token> Tokens { get; set; }
+
 
         public ComponentDetailsViewModel()
         {
-            Settings = new ComponentSettings();
-            Topics = new ConcurrentDictionary<string, TopicInComponent>();
+            Topics = new List<string>();
+            ComponentRetentions = new List<ComponentRetention>();
+            ComponentSettings = new ComponentSettings();
+            Tokens = new List<Token>();
         }
     }
 
-    public class TopicInComponent
+
+    public class ComponentRetention
     {
-        public Guid Id { get; set; }
+        public long Id { get; set; }
+
         public string Name { get; set; }
+        public RetentionType Type { get; set; }
+        public long TimeToLiveInMinutes { get; set; }
     }
 
     public class ComponentSettings
     {
-        public bool AllowSchemaValidation { get; set; }
-        public bool AllowTopicCreation { get; set; }
+        public bool IsTopicAutomaticCreationAllowed { get; set; }
+        public bool IsSchemaValidationEnabled { get; set; }
+        public bool IsAuthorizationEnabled { get; set; }
 
-        public bool EnableAuthorization { get; set; }
-        public List<ComponentToken> Tokens { get; set; }
-
-        public ComponentRetention RetentionPolicy { get; set; }
-
-
-
-        public ComponentSettings()
-        {
-            AllowSchemaValidation = false;
-            AllowTopicCreation = true;
-            EnableAuthorization = false;
-
-            Tokens = new List<ComponentToken>();
-            RetentionPolicy = new ComponentRetention();
-        }
-    }
-
-    public class ComponentRetention
-    {
-        public string Name { get; set; }
-        public long RetentionTimeInMinutes { get; set; }
-
-        public ComponentRetention()
-        {
-            Name = "default";
-            RetentionTimeInMinutes = -1;
-        }
-    }
-
-    public class ComponentToken
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-
-        // TOKEN will be generated from andyx-cli and it be added manually via tenants.json
-        public string Token { get; set; }
-
-        public bool IsActive { get; set; }
-
-        public bool CanConsume { get; set; }
-        public bool CanProduce { get; set; }
-
-        public DateTime ExpireDate { get; set; }
-        public string IssuedFor { get; set; }
-        public DateTime IssuedDate { get; set; }
+        public bool IsSubscriptionAutomaticCreationAllowed { get; set; }
+        public bool IsProducerAutomaticCreationAllowed { get; set; }
     }
 }

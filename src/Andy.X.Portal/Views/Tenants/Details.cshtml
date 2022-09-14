@@ -4,193 +4,118 @@
     ViewData["Title"] = Model.Name;
 }
 
-@*<div class="border-bottom" style="height:30px" aria-label="breadcrumb">
-    <ol class="breadcrumb ms-3 p-1">
-        <li class="breadcrumb-item"><a asp-area="" asp-controller="Tenants" asp-action="Index">TENANTS</a></li>
-        <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
-    </ol>
-</div>*@
-
 <div class="container mt-5">
-    <h6 class="text-uppercase text-muted">Tenant</h6>
-    <div class="row">
-        <p class="col-auto header"><strong>@Model.Name</strong></p>
-        <div class="col-auto">
-            <p><span class="badge subtitle rounded-pill bg-success">ONLINE</span></p>
-        </div>
-    </div>
 
-
-    <div class="row mb-5 mt-5">
-        <div class="col">
-            <div class="border p-4">
-                <p class="text-uppercase caption text-muted">Products</p>
-                <p class="subheader"><strong>1</strong></p>
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <span class="avatar avatar-lg" style="">
+                    <img src="~/assets/tenant1.png" width="64" height="64" alt="tenant">
+                </span>
             </div>
-        </div>
-        <div class="col">
-            <div class="border p-4">
-                <p class="text-uppercase caption text-muted">In Rate</p>
-                <p class="subheader"><strong>0.00</strong></p>
+            <div class="col">
+                <h1 class="page-title">@Model.Name</h1>
+                <div class="page-subtitle">
+                    <div class="row">
+                        <div class="col-auto">
+                            <a href="#" class="text-reset">id <strong>@Model.Id</strong></a>
+                        </div>
+                        <div class="col-auto text-success">
+                            active
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col">
-            <div class=" border p-4">
-                <p class="text-uppercase caption text-muted">Out Rate</p>
-                <p class="subheader"><strong>0.00</strong></p>
-            </div>
-        </div>
-        <div class="col">
-            <div class="border p-4">
-                <p class="text-uppercase caption text-muted">In throughput</p>
-                <p class="subheader"><strong>0 Bytes</strong></p>
-            </div>
-        </div>
-        <div class="col">
-            <div class="border p-4">
-                <p class="text-uppercase caption text-muted">Out throughput</p>
-                <p class="subheader"><strong>0 Bytes</strong></p>
-            </div>
-        </div>
-        <div class="col">
-            <div class=" border p-4">
-                <p class="text-uppercase caption text-muted">Storage Size</p>
-                <p class="subheader"><strong>0 Bytes</strong></p>
+            <div class="col-auto d-none d-md-flex">
+                <a href="#" class="btn btn-primary">
+                    Settings
+                </a>
             </div>
         </div>
     </div>
 
-    <section class="border">
-
-        <!-- Tabs navs -->
-        <ul class="nav nav-tabs nav-fill mb-3" id="ex-2" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active"
-                   id="ex-2-tab-1"
-                   data-mdb-toggle="pill"
-                   href="#ex-2-tabs-1"
-                   role="tab"
-                   aria-controls="pills-1"
-                   aria-selected="true">Overview</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link"
-                   id="ex-2-tab-2"
-                   data-mdb-toggle="pill"
-                   href="#ex-2-tabs-2"
-                   role="tab"
-                   aria-controls="pills-2"
-                   aria-selected="false">Authorization</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link"
-                   id="ex-2-tab-3"
-                   data-mdb-toggle="pill"
-                   href="#ex-2-tabs-3"
-                   role="tab"
-                   aria-controls="pills-3"
-                   aria-selected="false">Certificates</a>
-            </li>
-        </ul>
-        <!-- Tabs navs -->
-        <!-- Tabs content-->
-        <div class="tab-content mx-3" id="ex-2-content">
-            <div class="tab-pane fade show active"
-                 id="ex-2-tabs-1"
-                 role="tabpanel"
-                 aria-labelledby="pills-1-tab">
-
-                <p class="text-uppercase">Name</p>
-                <div class="alert alert-light base" role="alert">
-                    @Model.Name
+    <div class="row row-cards mt-2">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="subheader">Products</div>
+                    <div class="h3 m-0">@Model.Products.Count</div>
                 </div>
-
-                <p class="text-uppercase">ALLOW PRODUCT CREATION</p>
-                <div class="alert alert-light base" role="alert">
-                    @Model.Settings.AllowProductCreation
-                </div>
-
-                <p class="text-uppercase">ENABLE ENCRYPTION IN MOTION</p>
-                <div class="alert alert-light base" role="alert">
-                    @Model.Settings.EnableEncryption
-                </div>
-
-                <p class="text-uppercase">ENABLE ENCRYPTION IN REST</p>
-                <div class="alert alert-light base" role="alert">
-                    @Model.Settings.EnableEncryption
-                </div>
-
-                <p class="text-uppercase">ENABLE GEO-REPLICATION</p>
-                <div class="alert alert-light base" role="alert">
-                    @Model.Settings.EnableGeoReplication
-                </div>
-
-                <p class="text-uppercase">LOGGING LEVEL</p>
-                <div class="alert alert-light base" role="alert">
-                    @Model.Settings.Logging.ToString()
-                </div>
-
-            </div>
-            <div class="tab-pane fade" id="ex-2-tabs-2" role="tabpanel" aria-labelledby="pills-2-tab">
-                <p class="text-uppercase">Enable Authorization</p>
-                <div class="alert alert-light" role="alert">
-                    @Model.Settings.EnableAuthorization.ToString()
-                </div>
-
-                <h6 class="text-uppercase text-muted  mt-5">Tokens</h6>
-                @if (Model.Settings.Tokens.Count() == 0)
-                {
-                    <div class="alert alert-warning" role="alert">
-                        <center>There is no <strong>Token</strong> created at the moment!</center>
-                    </div>
-                }
-                else
-                {
-                    <p class="note note-warning">
-                        <strong>Access Tokens: </strong>
-                        To access <strong>Tenant Tokens</strong> and link to your application, request it from <strong>Andy X CLI</strong>. Accessing Tokens is not possible from Andy X Portal.
-                    </p>
-                }
-                @foreach (var token in Model.Settings.Tokens)
-                {
-                    <div class="alert alert-light" role="alert">
-                        <p class="text-uppercase">Token</p>
-                        @if (@token.IssuedFor != "")
-                        {
-                            <p class="subtitle font-weight-bold">@token.IssuedFor</p>
-                        }
-                        else
-                        {
-                            <p class="subtitle font-weight-bold">default</p>
-                        }
-                        <p class="base">Issued Date: @token.IssuedDate</p>
-                        <p class="base">Expire Date: @token.ExpireDate</p>
-                    </div>
-                }
-            </div>
-            <div class="tab-pane fade" id="ex-2-tabs-3" role="tabpanel" aria-labelledby="pills-3-tab">
-                <h6 class="text-uppercase text-muted  mt-5">Certificate</h6>
-
-
-                <p class="text-uppercase">Certificate Path</p>
-                @if (@Model.Settings.CertificatePath != null)
-                {
-                    <div class="alert alert-light base" role="alert">
-                        @Model.Settings.CertificatePath
-                    </div>
-                }
-                else
-                {
-                    <div class="alert alert-light base" role="alert">
-                        NO CERTIFICATE LINKED
-                    </div>
-                }
-                <p class="note note-warning">
-                    <strong>Linking certificate: </strong>
-                    Linking certificate is possible by Andy X CLI or tenants_config.json and it requires restarting the cluster.
-                </p>
             </div>
         </div>
-        <!-- Tabs content-->
-    </section>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="subheader">Tokens</div>
+                    <div class="h3 m-0">@Model.Tokens.Count</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="subheader">Data Retention</div>
+                    <div class="h3 m-0">@Model.TenantRetentions.Count</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="page-title mt-5">Products</h2>
+    <h5 class="">List</h5>
+    <div class="row row-cards mt-1">
+        @if (Model.Products.Count == 0)
+        {
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-title">No products yet!</h4>
+                <div class="text-muted">To create a new product, please use Andy X Cli or Andy X Clients.</div>
+            </div>
+        }
+        @foreach (var product in Model.Products)
+        {
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-auto">
+                                <span class="avatar avatar-lg" style="">
+                                    <img src="~/assets/product.png" width="64" height="64" alt="product">
+
+                                </span>
+                            </div>
+                            <div class="col">
+                                <div class="text-muted">
+                                    Product
+                                </div>
+                                <h4 class="card-title m-0">
+                                    <a asp-area="" asp-controller="Products" asp-action="Details" asp-route-tenant="@Model.Name" asp-route-id="@product">@product</a>
+                                </h4>
+                                <div class="small mt-1">
+                                    <span class="badge bg-green"></span> Online
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <a asp-area="" asp-controller="Products" asp-action="Details" asp-route-tenant="@Model.Name" asp-route-id="@product" class="btn">
+                                    View
+                                </a>
+
+                            </div>
+                            <div class="col-auto">
+                                <div class="dropdown">
+                                    <a href="#" class="card-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/dots-vertical -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><circle cx="12" cy="12" r="1" /><circle cx="12" cy="19" r="1" /><circle cx="12" cy="5" r="1" /></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
 </div>
+

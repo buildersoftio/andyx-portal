@@ -52,15 +52,15 @@ namespace Andy.X.Portal.Models.Consumers
     public enum SubscriptionType
     {
         /// <summary>
-        /// Only one reader
+        /// Only one consumer
         /// </summary>
-        Exclusive,
+        Unique,
         /// <summary>
-        /// One reader with one backup
+        /// One consumer with one backup
         /// </summary>
         Failover,
         /// <summary>
-        /// Shared to more than one reader.
+        /// Shared to more than one consumer.
         /// </summary>
         Shared
     }
@@ -69,5 +69,18 @@ namespace Andy.X.Portal.Models.Consumers
     {
         Earliest,
         Latest
+    }
+
+    public enum SubscriptionMode
+    {
+        /// <summary>
+        /// Durable
+        /// </summary>
+        Resilient,
+
+        /// <summary>
+        /// Non Durable
+        /// </summary>
+        NonResilient
     }
 }
