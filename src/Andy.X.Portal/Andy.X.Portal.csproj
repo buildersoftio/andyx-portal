@@ -15,13 +15,13 @@
 
   <ItemGroup>
     <Compile Remove="Models\Products\Components\**" />
+    <Compile Remove="src\**" />
     <Content Remove="Models\Products\Components\**" />
+    <Content Remove="src\**" />
     <EmbeddedResource Remove="Models\Products\Components\**" />
+    <EmbeddedResource Remove="src\**" />
     <None Remove="Models\Products\Components\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="src\wwwroot\js\site.js" />
+    <None Remove="src\**" />
   </ItemGroup>
 
   <ItemGroup>

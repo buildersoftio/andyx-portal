@@ -1,5 +1,6 @@
 ﻿using Andy.X.Portal.Configurations;
 using Andy.X.Portal.Extensions;
+using Andy.X.Portal.Models.Subscriptions;
 using Andy.X.Portal.Models.Topics;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -19,7 +20,7 @@ namespace Andy.X.Portal.Services.Topics
             this.xNodeConfiguration = xNodeConfiguration;
         }
 
-        public TopicDetailsViewModel GetTopicDetailsViewModel(string tenant, string product, string component, string topic)
+        public TopicDetailsViewModel GetTopicDetailsViewModel(Models.User user, string tenant, string product, string component, string topic)
         {
             var topicDetailsViewModel = new TopicDetailsViewModel();
 
@@ -27,7 +28,7 @@ namespace Andy.X.Portal.Services.Topics
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants/{tenant}/products/{product}/components/{component}/topics/{topic}";
-            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+            client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -39,14 +40,14 @@ namespace Andy.X.Portal.Services.Topics
             topicDetailsViewModel.Product = product;
             topicDetailsViewModel.Component = component;
 
-            topicDetailsViewModel.TopicSettings = GetTopicSettings(tenant, product, component, topic);
-            topicDetailsViewModel.Producers = GetTopicProducers(tenant, product, component, topic);
-            topicDetailsViewModel.Subscriptions = GetSubscriptions(tenant, product, component, topic);
+            topicDetailsViewModel.TopicSettings = GetTopicSettings(user, tenant, product, component, topic);
+            topicDetailsViewModel.Producers = GetTopicProducers(user, tenant, product, component, topic);
+            topicDetailsViewModel.Subscriptions = GetSubscriptions(user, tenant, product, component, topic);
 
             return topicDetailsViewModel;
         }
 
-        private TopicSettings GetTopicSettings(string tenant, string product, string component, string topic)
+        private TopicSettings GetTopicSettings(Models.User user, string tenant, string product, string component, string topic)
         {
             var result = new TopicSettings();
 
@@ -54,7 +55,7 @@ namespace Andy.X.Portal.Services.Topics
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants/{tenant}/products/{product}/components/{component}/topics/{topic}/settings";
-            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+            client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -66,7 +67,7 @@ namespace Andy.X.Portal.Services.Topics
             return result;
         }
 
-        private List<string> GetTopicProducers(string tenant, string product, string component, string topic)
+        private List<string> GetTopicProducers(Models.User user, string tenant, string product, string component, string topic)
         {
             var results = new List<string>();
 
@@ -74,7 +75,7 @@ namespace Andy.X.Portal.Services.Topics
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants/{tenant}/products/{product}/components/{component}/topics/{topic}/producers";
-            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+            client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -86,7 +87,7 @@ namespace Andy.X.Portal.Services.Topics
             return results;
         }
 
-        private List<TopicSubscription> GetSubscriptions(string tenant, string product, string component, string topic)
+        private List<TopicSubscription> GetSubscriptions(Models.User user, string tenant, string product, string component, string topic)
         {
             var results = new List<TopicSubscription>();
 
@@ -94,7 +95,7 @@ namespace Andy.X.Portal.Services.Topics
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants/{tenant}/products/{product}/components/{component}/topics/{topic}/subscriptions";
-            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+            client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -105,8 +106,5 @@ namespace Andy.X.Portal.Services.Topics
 
             return results;
         }
-
-
-
     }
 }

@@ -1,45 +1,43 @@
 ﻿using Andy.X.Portal.Configurations;
 using Andy.X.Portal.Extensions;
-using Andy.X.Portal.Models.Producers;
-using Andy.X.Portal.Models.Products;
+using Andy.X.Portal.Models.Subscriptions;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Net.Http;
 
-namespace Andy.X.Portal.Services.Producers
+namespace Andy.X.Portal.Services.Subscriptions
 {
-    public class ProducerService
+    public class SubscriptionService
     {
-        private readonly ILogger<ProducerService> logger;
+        private readonly ILogger<SubscriptionService> logger;
         private readonly XNodeConfiguration xNodeConfiguration;
 
-        public ProducerService(ILogger<ProducerService> logger, XNodeConfiguration xNodeConfiguration)
+        public SubscriptionService(ILogger<SubscriptionService> logger, XNodeConfiguration xNodeConfiguration)
         {
             this.logger = logger;
             this.xNodeConfiguration = xNodeConfiguration;
         }
 
-        public ProducerListViewModel GetProducerListViewModel(Models.User user)
+        public SubscriptionListViewModel GetOnlineSubscriptionsListViewModel(Models.User user)
         {
-            ProducerListViewModel producerListViewModel = new ProducerListViewModel();
+            SubscriptionListViewModel consumerListViewModel = new SubscriptionListViewModel();
 
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
-            string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/activities/producers";
+            string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/activities/subscriptions";
             client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
             if (httpResponseMessage.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                var list = JsonConvert.DeserializeObject<List<ProducerActivity>>(content);
-                producerListViewModel.Producers = list;
+                var list = JsonConvert.DeserializeObject<List<SubscriptionActivity>>(content);
+                consumerListViewModel.Subscriptions = list;
             }
 
-            foreach (var item in producerListViewModel.Producers)
+            foreach (var item in consumerListViewModel.Subscriptions)
             {
                 var locations = item.Location.Split("/");
                 item.Tenant = locations[0];
@@ -48,31 +46,32 @@ namespace Andy.X.Portal.Services.Producers
                 item.Topic = locations[3];
             }
 
-            return producerListViewModel;
+            return consumerListViewModel;
         }
 
-        public ProducerDetailsViewModel GetProducerDetailsViewModel(Models.User user, string tenant, string product, string component, string topic, string producerName)
+        public SubscriptionDetailsViewModel GetSubscriptionDetailsViewModel(Models.User user, string tenant, string product, string component, string topic, string subscription)
         {
-            var producerListViewModel = new ProducerDetailsViewModel();
+            var consumerDetailsViewModel = new SubscriptionDetailsViewModel();
 
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
-            string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants/{tenant}/products/{product}/components/{component}/topics/{topic}/producers/{producerName}";
+
+            string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants/{tenant}/products/{product}/components/{component}/topics/{topic}/subscriptions/{subscription}";
             client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
             if (httpResponseMessage.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                producerListViewModel = JsonConvert.DeserializeObject<ProducerDetailsViewModel>(content);
+                consumerDetailsViewModel = JsonConvert.DeserializeObject<SubscriptionDetailsViewModel>(content);
             }
 
-            producerListViewModel.Tenant = tenant;
-            producerListViewModel.Product = product;
-            producerListViewModel.Component = component;
-            producerListViewModel.Topic = topic;
+            consumerDetailsViewModel.Tenant = tenant;
+            consumerDetailsViewModel.Product = product;
+            consumerDetailsViewModel.Component = component;
+            consumerDetailsViewModel.Topic = topic;
 
-            return producerListViewModel;
+            return consumerDetailsViewModel;
         }
     }
 }

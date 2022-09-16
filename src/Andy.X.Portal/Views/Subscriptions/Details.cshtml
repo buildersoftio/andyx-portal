@@ -1,17 +1,18 @@
-﻿@using Andy.X.Portal.Models.Producers
-@model ProducerDetailsViewModel
+﻿@using Andy.X.Portal.Models.Subscriptions
+@model SubscriptionDetailsViewModel
 @{
     ViewData["Title"] = @Model.Name;
 }
 
-<div class="container mt-5">
 
+<div class="container mt-5">
 
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col-auto">
                 <span class="avatar avatar-lg" style="">
-                    <img src="~/assets/producer.png" width="64" height="64" alt="producer">
+                    <img src="~/assets/subscription.png" width="64" height="64" alt="subscription">
+
                 </span>
             </div>
             <div class="col">
@@ -22,9 +23,38 @@
                             <a class="text-reset">@Model.Tenant / @Model.Product / @Model.Component / @Model.Topic</a>
                         </div>
                         <div class="col-auto text-success">
-                            @Model.InstanceType.ToString().ToUpper()
+                            @Model.SubscriptionType.ToString().ToUpper()
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cards mt-2">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="subheader">Read Entry Position</div>
+                    <div class="h3 m-0">na</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="subheader">Marked Delete Entry Position</div>
+                    <div class="h3 m-0">na</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="subheader">Pending Read Operations</div>
+                    <div class="h3 m-0">na</div>
                 </div>
             </div>
         </div>
@@ -35,11 +65,11 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="header">Producer</div>
+                    <div class="header">Subscription</div>
                     <div class="subheader">Overview</div>
 
                     <div class="mb-3 mt-3">
-                        <label class="form-label">Producer Name</label>
+                        <label class="form-label">Subscription Name</label>
                         <input type="text" class="form-control" name="example-text-input" disabled value="@Model.Name" placeholder="No Information">
                     </div>
 
@@ -49,8 +79,19 @@
                     </div>
 
                     <div class="mb-3 mt-3">
-                        <label class="form-label">Instance Type</label>
-                        <input type="text" class="form-control" name="example-text-input" disabled value="@Model.InstanceType.ToString()" placeholder="No Information">
+                        <label class="form-label">Subscription Type</label>
+                        <input type="text" class="form-control" name="example-text-input" disabled value="@Model.SubscriptionType.ToString()" placeholder="No Information">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Subscription Mode</label>
+                        <input type="text" class="form-control" name="example-text-input" disabled value="@Model.SubscriptionMode.ToString()" placeholder="No Information">
+                    </div>
+
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Subscription Mode</label>
+                        <input type="text" class="form-control" name="example-text-input" disabled value="@Model.InitialPosition.ToString()" placeholder="No Information">
                     </div>
 
                     <div class="mb-3 mt-3">
@@ -87,6 +128,4 @@
             </div>
         </div>
     </div>
-
-
 </div>

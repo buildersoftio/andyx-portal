@@ -1,5 +1,6 @@
 ﻿using Andy.X.Portal.Configurations;
 using Andy.X.Portal.Extensions;
+using Andy.X.Portal.Models;
 using Andy.X.Portal.Models.Clusters;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -17,7 +18,7 @@ namespace Andy.X.Portal.Services.Clusters
             this.xNodeConfiguration = xNodeConfiguration;
         }
 
-        public ClustersDetailsViewModel GetClustersDetailsViewModel()
+        public ClustersDetailsViewModel GetClustersDetailsViewModel(Models.User user)
         {
             var clustersDetailsViewModel = new ClustersDetailsViewModel();
 
@@ -25,7 +26,7 @@ namespace Andy.X.Portal.Services.Clusters
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/clusters";
-            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+            client.AddBasicAuthorizationHeader(user.Username, user.Username);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;

@@ -1,12 +1,14 @@
 using Andy.X.Portal.Configurations;
 using Andy.X.Portal.Services.Clusters;
 using Andy.X.Portal.Services.Components;
-using Andy.X.Portal.Services.Consumers;
+using Andy.X.Portal.Services.Home;
 using Andy.X.Portal.Services.Producers;
 using Andy.X.Portal.Services.Products;
-using Andy.X.Portal.Services.Storages;
+using Andy.X.Portal.Services.Subscriptions;
 using Andy.X.Portal.Services.Tenants;
 using Andy.X.Portal.Services.Topics;
+using Andy.X.Portal.Services.User;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -33,14 +35,18 @@ namespace Andy.X.Portal
             Configuration.Bind("XNode", xNodeConfiguration);
             services.AddSingleton(xNodeConfiguration);
 
+            services.AddSingleton<UserService>();
             services.AddSingleton<ClusterService>();
-            services.AddSingleton<StorageService>();
+            services.AddSingleton<HomeService>();
             services.AddSingleton<TenantService>();
             services.AddSingleton<ProductService>();
             services.AddSingleton<ComponentService>();
             services.AddSingleton<TopicService>();
             services.AddSingleton<ProducerService>();
-            services.AddSingleton<ConsumerService>();
+            services.AddSingleton<SubscriptionService>();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(x=>x.LoginPath= "/home/login");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +63,8 @@ namespace Andy.X.Portal
                 app.UseHsts();
             }
 
+  
+
             app.UseStaticFiles();
 
             app.UseHttpsRedirection();
@@ -66,7 +74,6 @@ namespace Andy.X.Portal
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-
             {
                 endpoints.MapControllerRoute(
                     name: "default",

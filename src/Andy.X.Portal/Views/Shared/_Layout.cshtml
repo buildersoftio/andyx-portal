@@ -101,7 +101,7 @@
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                <a class="nav-link" asp-area="" asp-controller="Producers" asp-action="Index">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-big-up-lines" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -117,7 +117,7 @@
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                <a class="nav-link" asp-area="" asp-controller="Subscriptions" asp-action="Index">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
 
                                         <!-- Download SVG icon from http://tabler-icons.io/i/layout-2 -->
@@ -168,12 +168,12 @@
         <div class="row text-center align-items-center flex-row-reverse">
             <div class="col-lg-auto ms-lg-auto">
                 <ul class="list-inline list-inline-dots mb-0">
-                    <li class="list-inline-item"><a href="https://github.com/buildersoftdev/andyx" class="link-secondary">Documentation</a></li>
+                    <li class="list-inline-item"><a asp-area="" asp-controller="Home" asp-action="License" class="link-secondary">License</a></li>
+                    <li class="list-inline-item"><a href="https://github.com/buildersoftdev/andyx" class="link-secondary" target="_blank">Documentation</a></li>
                     @*<li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a></li>*@
                     <li class="list-inline-item"><a href="https://github.com/buildersoftdev/andyx-portal" target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
                     <li class="list-inline-item">
                         <a href="https://github.com/buildersoftdev/andyx" target="_blank" class="link-secondary" rel="noopener">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink icon-filled icon-inline" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
                             Sponsor
                         </a>

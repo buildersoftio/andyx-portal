@@ -21,7 +21,7 @@ namespace Andy.X.Portal.Services.Tenants
             this.xNodeConfiguration = xNodeConfiguration;
         }
 
-        public TenantListViewModel GetTenantListViewModel()
+        public TenantListViewModel GetTenantListViewModel(Models.User user)
         {
             TenantListViewModel tenantListViewModel = new TenantListViewModel();
 
@@ -29,7 +29,7 @@ namespace Andy.X.Portal.Services.Tenants
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants";
-            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+            client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -42,7 +42,7 @@ namespace Andy.X.Portal.Services.Tenants
             return tenantListViewModel;
         }
 
-        public TenantDetailsViewModel GetTenantDetailsViewModel(string tenantName)
+        public TenantDetailsViewModel GetTenantDetailsViewModel(Models.User user, string tenantName)
         {
             TenantDetailsViewModel tenantDetails = new TenantDetailsViewModel();
 
@@ -50,7 +50,7 @@ namespace Andy.X.Portal.Services.Tenants
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants/{tenantName}";
-            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+            client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -59,16 +59,16 @@ namespace Andy.X.Portal.Services.Tenants
                 tenantDetails = JsonConvert.DeserializeObject<TenantDetailsViewModel>(content);
             }
 
-            tenantDetails.Settings = GetTenantSettings(tenantName);
-            tenantDetails.Products = GetTenantProducts(tenantName);
-            tenantDetails.Tokens = GetTenantTokens(tenantName);
-            tenantDetails.TenantRetentions = GetTenantRetentions(tenantName);
+            tenantDetails.Settings = GetTenantSettings(user, tenantName);
+            tenantDetails.Products = GetTenantProducts(user, tenantName);
+            tenantDetails.Tokens = GetTenantTokens(user, tenantName);
+            tenantDetails.TenantRetentions = GetTenantRetentions(user, tenantName);
 
             return tenantDetails;
         }
 
 
-        private TenantSettings GetTenantSettings(string tenantName)
+        private TenantSettings GetTenantSettings(Models.User user, string tenantName)
         {
             var tenantSettings = new TenantSettings();
 
@@ -76,7 +76,7 @@ namespace Andy.X.Portal.Services.Tenants
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants/{tenantName}/settings";
-            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+            client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -87,7 +87,7 @@ namespace Andy.X.Portal.Services.Tenants
 
             return tenantSettings;
         }
-        private List<string> GetTenantProducts(string tenantName)
+        private List<string> GetTenantProducts(Models.User user, string tenantName)
         {
             var productList = new List<string>();
 
@@ -95,7 +95,7 @@ namespace Andy.X.Portal.Services.Tenants
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants/{tenantName}/products";
-            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+            client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -106,7 +106,7 @@ namespace Andy.X.Portal.Services.Tenants
 
             return productList;
         }
-        private List<Token> GetTenantTokens(string tenantName)
+        private List<Token> GetTenantTokens(Models.User user, string tenantName)
         {
             var tenantTokens = new List<Token>();
 
@@ -114,7 +114,7 @@ namespace Andy.X.Portal.Services.Tenants
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants/{tenantName}/tokens";
-            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+            client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -125,7 +125,7 @@ namespace Andy.X.Portal.Services.Tenants
 
             return tenantTokens;
         }
-        private List<TenantRetention> GetTenantRetentions(string tenantName)
+        private List<TenantRetention> GetTenantRetentions(Models.User user, string tenantName)
         {
             var tenantRetentions = new List<TenantRetention>();
 
@@ -133,7 +133,7 @@ namespace Andy.X.Portal.Services.Tenants
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants/{tenantName}/retentions";
-            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+            client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;

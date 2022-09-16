@@ -1,5 +1,5 @@
 ﻿using Andy.X.Portal.Models.Components;
-using Andy.X.Portal.Models.Consumers;
+using Andy.X.Portal.Models.Subscriptions;
 using Andy.X.Portal.Models.Producers;
 using System.Collections.Generic;
 
@@ -24,12 +24,12 @@ namespace Andy.X.Portal.Models.Lineage
         public List<ProducerDetailsViewModel> Producers { get; set; }
         public string Topic { get; set; }
         public string TopicPhysicalPath { get; set; }
-        public List<ConsumerDetailsViewModel> Consumers { get; set; }
+        public List<SubscriptionDetailsViewModel> Consumers { get; set; }
 
         public StreamLineage()
         {
             Producers = new List<ProducerDetailsViewModel>();
-            Consumers = new List<ConsumerDetailsViewModel>();
+            Consumers = new List<SubscriptionDetailsViewModel>();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Andy.X.Portal.Services.Tenants;
+﻿using Andy.X.Portal.Services.Subscriptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -6,13 +6,13 @@ using System.Linq;
 namespace Andy.X.Portal.Controllers
 {
     [Authorize]
-    public class TenantsController : Controller
+    public class SubscriptionsController : Controller
     {
-        private readonly TenantService tenantService;
+        private readonly SubscriptionService consumerService;
 
-        public TenantsController(TenantService tenantService)
+        public SubscriptionsController(SubscriptionService consumerService)
         {
-            this.tenantService = tenantService;
+            this.consumerService = consumerService;
         }
 
         public IActionResult Index()
@@ -22,17 +22,17 @@ namespace Andy.X.Portal.Controllers
                 Password = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Password").Value,
                 Username = HttpContext.User.Identity.Name
             };
-            return View(tenantService.GetTenantListViewModel(user));
+            return View(consumerService.GetOnlineSubscriptionsListViewModel(user));
         }
 
-        public IActionResult Details(string id)
+        public IActionResult Details(string tenant, string product, string component, string topic, string id)
         {
             var user = new Models.User()
             {
                 Password = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Password").Value,
                 Username = HttpContext.User.Identity.Name
             };
-            return View(tenantService.GetTenantDetailsViewModel(user, id));
+            return View(consumerService.GetSubscriptionDetailsViewModel(user, tenant, product, component, topic, id));
         }
     }
 }

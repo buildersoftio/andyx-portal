@@ -1,4 +1,4 @@
-﻿using Andy.X.Portal.Models.Consumers;
+﻿using Andy.X.Portal.Models.Subscriptions;
 using System;
 using System.Collections.Generic;
 
@@ -41,11 +41,5 @@ namespace Andy.X.Portal.Models.Topics
         public int MinWriteBufferNumberToMerge { get; set; }
         public int MaxBackgroundCompactionsThreads { get; set; }
         public int MaxBackgroundFlushesThreads { get; set; }
-    }
-
-    public class TopicSubscription
-    {
-        public string Name { get; set; }
-        public SubscriptionType Type { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace Andy.X.Portal.Services.Components
             this.xNodeConfiguration = xNodeConfiguration;
         }
 
-        public ComponentDetailsViewModel GetComponentDetailsViewModel(string tenant, string product, string componentName)
+        public ComponentDetailsViewModel GetComponentDetailsViewModel(Models.User user, string tenant, string product, string componentName)
         {
             var componentDetailsViewModel = new ComponentDetailsViewModel();
 
@@ -29,7 +29,7 @@ namespace Andy.X.Portal.Services.Components
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants/{tenant}/products/{product}/components/{componentName}";
-            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+            client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -41,15 +41,15 @@ namespace Andy.X.Portal.Services.Components
             componentDetailsViewModel.Tenant = tenant;
             componentDetailsViewModel.Product = product;
 
-            componentDetailsViewModel.ComponentSettings = GetComponentSettings(tenant, product, componentName);
-            componentDetailsViewModel.Topics = GetTopics(tenant, product, componentName);
-            componentDetailsViewModel.Tokens = GetTokens(tenant, product, componentName);
-            componentDetailsViewModel.ComponentRetentions = GetRetentions(tenant, product, componentName);
+            componentDetailsViewModel.ComponentSettings = GetComponentSettings(user,tenant, product, componentName);
+            componentDetailsViewModel.Topics = GetTopics(user, tenant, product, componentName);
+            componentDetailsViewModel.Tokens = GetTokens(user, tenant, product, componentName);
+            componentDetailsViewModel.ComponentRetentions = GetRetentions(user, tenant, product, componentName);
 
             return componentDetailsViewModel;
         }
 
-        private ComponentSettings GetComponentSettings(string tenant, string product, string componentName)
+        private ComponentSettings GetComponentSettings(Models.User user, string tenant, string product, string componentName)
         {
             var result = new ComponentSettings();
 
@@ -57,7 +57,7 @@ namespace Andy.X.Portal.Services.Components
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants/{tenant}/products/{product}/components/{componentName}/settings";
-            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+            client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -68,7 +68,7 @@ namespace Andy.X.Portal.Services.Components
 
             return result;
         }
-        private List<string> GetTopics(string tenant, string product, string componentName)
+        private List<string> GetTopics(Models.User user, string tenant, string product, string componentName)
         {
             var result = new List<string>();
 
@@ -76,7 +76,7 @@ namespace Andy.X.Portal.Services.Components
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants/{tenant}/products/{product}/components/{componentName}/topics";
-            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+            client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -87,7 +87,7 @@ namespace Andy.X.Portal.Services.Components
 
             return result;
         }
-        private List<Token> GetTokens(string tenant, string product, string componentName)
+        private List<Token> GetTokens(Models.User user, string tenant, string product, string componentName)
         {
             var result = new List<Token>();
 
@@ -95,7 +95,7 @@ namespace Andy.X.Portal.Services.Components
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants/{tenant}/products/{product}/components/{componentName}/tokens";
-            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+            client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -106,7 +106,7 @@ namespace Andy.X.Portal.Services.Components
 
             return result;
         }
-        private List<ComponentRetention> GetRetentions(string tenant, string product, string componentName)
+        private List<ComponentRetention> GetRetentions(Models.User user, string tenant, string product, string componentName)
         {
             var result = new List<ComponentRetention>();
 
@@ -114,7 +114,7 @@ namespace Andy.X.Portal.Services.Components
             client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
 
             string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/tenants/{tenant}/products/{product}/components/{componentName}/retentions";
-            client.AddBasicAuthorizationHeader(xNodeConfiguration.Username, xNodeConfiguration.Password);
+            client.AddBasicAuthorizationHeader(user.Username, user.Password);
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
             string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
