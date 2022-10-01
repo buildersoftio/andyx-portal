@@ -18,6 +18,7 @@ namespace Andy.X.Portal.Models.Producers
         public string Location { get; set; }
         public bool IsActive { get; set; }
 
+        public int InstancesCount { get; set; }
 
         public string Tenant { get; set; }
         public string Product { get; set; }

@@ -37,6 +37,7 @@ namespace Andy.X.Portal.Models.Clusters
     public enum ClusterStatus
     {
         Online,
+        PartiallyOnline,
         Starting,
         Offline,
         Restarting,
@@ -72,12 +73,15 @@ namespace Andy.X.Portal.Models.Clusters
         [JsonConverter(typeof(StringEnumConverter))]
         public ReplicaTypes Type { get; set; }
 
+        public bool IsConnected { get; set; }
+
 
         public Replica()
         {
             NodeId = "standalone_01";
             Type = ReplicaTypes.MainOrWorker;
             ConnectionType = NodeConnectionType.NON_SSL;
+            IsConnected = false;
         }
     }
 

@@ -1,7 +1,5 @@
 ﻿using Andy.X.Portal.Configurations;
 using Andy.X.Portal.Extensions;
-using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Net.Http;
 
 namespace Andy.X.Portal.Services.User

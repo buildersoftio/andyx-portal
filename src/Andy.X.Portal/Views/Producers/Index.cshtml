@@ -42,13 +42,13 @@
                                     </div>
                                     @if (producer.IsActive)
                                     {
-                                        <div class="small mt-1">
-                                            <span class="badge bg-green"></span> Online
+                                        <div class="small mt-1 col-auto">
+                                            <span class="badge bg-green"></span> Online @producer.InstancesCount instances connected
                                         </div>
                                     }
                                     else
                                     {
-                                        <div class="small mt-1">
+                                        <div class="small mt-1 ">
                                             <span class="badge bg-danger"></span> Offline
                                         </div>
                                     }
