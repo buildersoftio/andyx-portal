@@ -12,6 +12,7 @@ namespace Andy.X.Portal.Models.Clusters
         public long ActiveDataIngestions { get; set; }
         public long ActiveSubscriptions { get; set; }
 
+        public Replica CurrentNode { get; set; }
 
         public string Name { get; set; }
 
@@ -26,6 +27,8 @@ namespace Andy.X.Portal.Models.Clusters
             ShardDistributionType = DistributionTypes.Sync;
             Shards = new List<Shard>();
             Status = ClusterStatus.Starting;
+
+            CurrentNode = new Replica();
         }
     }
     public enum DistributionTypes

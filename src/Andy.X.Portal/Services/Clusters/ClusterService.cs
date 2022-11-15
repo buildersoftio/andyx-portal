@@ -34,7 +34,30 @@ namespace Andy.X.Portal.Services.Clusters
                 clustersDetailsViewModel = JsonConvert.DeserializeObject<ClustersDetailsViewModel>(content);
             }
 
+            clustersDetailsViewModel.CurrentNode = GetCurrentNode(user);
+
             return clustersDetailsViewModel;
         }
+
+        private Replica GetCurrentNode(Models.User user)
+        {
+            var result = new Replica();
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("x-called-by", $"andyx-portal v3");
+
+            string request = $"{xNodeConfiguration.ServiceUrl}/api/v3/clusters/nodes/current";
+            client.AddBasicAuthorizationHeader(user.Username, user.Username);
+
+            HttpResponseMessage httpResponseMessage = client.GetAsync(request).Result;
+            string content = httpResponseMessage.Content.ReadAsStringAsync().Result;
+            if (httpResponseMessage.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                result = JsonConvert.DeserializeObject<Replica>(content);
+            }
+
+            return result;
+        }
+
     }
 }
