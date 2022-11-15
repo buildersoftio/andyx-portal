@@ -1,70 +1,169 @@
-﻿@{
+﻿@using Andy.X.Portal.Models.Home
+@model HomeViewModel
+@{
     ViewData["Title"] = "Home";
 }
 
-<div class="border-bottom" style="height:30px" aria-label="breadcrumb">
-    <ol class="breadcrumb ms-3 p-1">
-        <li class="breadcrumb-item"><a href="#">DASHBOARD</a></li>
-        <li class="breadcrumb-item active" aria-current="page">HOME</li>
-    </ol>
-</div>
-
-
-
 <div class="container mt-5">
 
-    <p class="note note-warning">
-        Andy X Portal works only with Andy X v2.1.
-        Please make sure that the Environment variable <strong>ANDYX_EXPOSE_CONFIG_ENDPOINTS</strong> is <strong>set</strong> at Andy X Node.
-    </p>
 
-    <div class="row">
-        <div class="col-md-4 mb-5">
+    @if (Model.TenantCount != -1)
+    {
+        <div class="alert alert-success mt-4" role="alert">
+            <div class="d-flex">
+                <div>
+                    <!-- Download SVG icon from http://tabler-icons.io/i/check -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 12l5 5l10 -10"></path></svg>
+                </div>
+                <div>
+                    <h4 class="alert-title">Wow! Everything worked!</h4>
+                    <div class="text-muted">Andy X Portal is connected with Andy X Node, feel free to surf the cluster.</div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger mt-4" role="alert">
+            <div class="d-flex">
+                <div>
+                    <!-- Download SVG icon from http://tabler-icons.io/i/alert-circle -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                </div>
+                <div>
+                    <h4 class="alert-title">Connection doesnot exists</h4>
+                    <div class="text-muted">Please check the node configuration.</div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+    <div class="row row-deck row-cards">
+        <div class="col-sm-6 col-lg-3">
             <div class="card">
-                <img src="~/assets/andyx (1).jpg"
-                     class="card-img-top"
-                     alt="..." />
-                <div class="card-body">
-                    <h4 class="semibold mb-3">Storage</h4>
-                    <p class="mb-4">
-                        Manage storage configuration and check statuses all in one place.
-                    </p>
-                    <a asp-area="" asp-controller="Storages" asp-action="Index" class="btn btn-primary">View</a>
+                <div class="card-body p-2 text-center">
+                    <div class="text-end text-green">
+                        <span class="text-green d-inline-flex align-items-center lh-1">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
+                        </span>
+                    </div>
+                    <div class="h1 m-0">@Model.TenantCount</div>
+                    <div class="text-muted mb-3">Tenants</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card">
+                <div class="card-body p-2 text-center">
+                    <div class="text-end text-green">
+                        <span class="text-green d-inline-flex align-items-center lh-1">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
+                        </span>
+                    </div>
+                    <div class="h1 m-0">@Model.ProductCount</div>
+                    <div class="text-muted mb-3">Products</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card">
+                <div class="card-body p-2 text-center">
+                    <div class="text-end text-green">
+                        <span class="text-green d-inline-flex align-items-center lh-1">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
+                        </span>
+                    </div>
+                    <div class="h1 m-0">@Model.ComponentCount</div>
+                    <div class="text-muted mb-3">Components</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card">
+                <div class="card-body p-2 text-center">
+                    <div class="text-end text-green">
+                        <span class="text-green d-inline-flex align-items-center lh-1">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
+                        </span>
+                    </div>
+                    <div class="h1 m-0">@Model.TopicCount</div>
+                    <div class="text-muted mb-3">Topics</div>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4 mb-5">
+        <div class="col-sm-6 col-lg-6">
             <div class="card">
-                <img src="~/assets/andyx (2).jpg"
-                     class="card-img-top"
-                     height=auto
-                     width=auto
-                     alt="..." />
-                <div class="card-body">
-                    <h4 class="semibold mb-3">Tenant</h4>
-                    <p class="mb-4">
-                        Manage Tenants connected to this cluster, manage configurations and authorization foreach tenant.
-                    </p>
-                    <a asp-area="" asp-controller="Tenants" asp-action="Index" class="btn btn-primary">View</a>
+                <div class="card-body p-2 text-center">
+                    <div class="text-end text-green">
+                        <span class="text-green d-inline-flex align-items-center lh-1">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
+                        </span>
+                    </div>
+                    <div class="h1 m-0">@Model.ProducersCount</div>
+                    <div class="text-muted mb-3">Data ingestion clients</div>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4 mb-5">
+        <div class="col-sm-6 col-lg-6">
             <div class="card">
-                <img src="~/assets/andyx (1).jpg"
-                     class="card-img-top"
-                     alt="..." />
-                <div class="card-body">
-                    <h4 class="semibold mb-3">Products</h4>
-                    <p class="mb-4">
-                        Andy X is ready for Data Mesh! Create Products and start developing in your one environment.
-                    </p>
-                    <a asp-area="" asp-controller="Products" asp-action="Index" class="btn btn-primary">View</a>
+                <div class="card-body p-2 text-center">
+                    <div class="text-end text-green">
+                        <span class="text-green d-inline-flex align-items-center lh-1">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
+                        </span>
+                    </div>
+                    <div class="h1 m-0">@Model.SubscriptionCount</div>
+                    <div class="text-muted mb-3">Subscriptions</div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="alert alert-info mt-3" role="alert">
+
+        <div class="d-flex">
+            <div>
+                <!-- Download SVG icon from http://tabler-icons.io/i/info-circle -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12.01" y2="8"></line><polyline points="11 12 12 12 12 16 13 16"></polyline></svg>
+            </div>
+            <div>
+                <h4 class="alert-title">Did you know?</h4>
+                <div class="text-muted">To connect to Andy X Cluster, please make sure you set the environment variable <strong>ANDYX_EXPOSE_CONFIG_ENDPOINTS</strong>.</div>
+                <a href="https://buildersoftdev.azurewebsites.net/andyx" class="btn mt-3 link-secondary" target="_blank" role="button">How to connect?</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cards mt-2">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="header">Introduction</div>
+                    <div class="subheader">Overview</div>
+
+                    <p class="mt-1">
+                        Andy X is an open-source distributed streaming platform designed to deliver the best performance possible for high-performance data pipelines, streaming analytics, streaming between microservices and data integrations.
+                        Andy X Portal is a standalone web app that it is used to check Andy X Cluster. As a solutions has been designed from the beginning to be cloud-native also can run on-prem using Docker. Portal can be deployed as standalone application.
+                    </p>
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Node</label>
+                        <input type="text" class="form-control" name="example-text-input" disabled value="@Model.NodeUrl" placeholder="No Information">
+                        <label class=" subheader">Node url, when you would like to connect e.g., https://localhost:6541</label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+

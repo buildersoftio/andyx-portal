@@ -4,92 +4,343 @@
     ViewData["Title"] = @Model.Name;
 }
 
-<div class="border-bottom" style="height:30px" aria-label="breadcrumb">
-    <ol class="breadcrumb ms-3 p-1">
-        <li class="breadcrumb-item"><a asp-area="" asp-controller="Products" asp-action="Index">PRODUCTS</a></li>
-        <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
-    </ol>
-</div>
-
-
 <div class="container mt-5">
-    <h6 class="text-uppercase text-muted">Product</h6>
-    <div class="row">
-        <p class="col-auto header">@Model.Tenant / <strong>@Model.Name</strong></p>
-        <div class="col-auto">
-            <p><span class="badge subtitle rounded-pill bg-success">ONLINE</span></p>
+
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <span class="avatar avatar-lg" style="">
+                    <img src="~/assets/product.png" width="64" height="64" alt="tenant">
+
+                </span>
+            </div>
+            <div class="col">
+                <h1 class="page-title">@Model.Tenant / @Model.Name</h1>
+                <div class="page-subtitle">
+                    <div class="row">
+                        <div class="col-auto">
+                            <a href="#" class="text-reset">id <strong>@Model.Id</strong></a>
+                        </div>
+                        <div class="col-auto text-success">
+                            active
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto d-none d-md-flex">
+                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-settings">
+                    Settings
+                </a>
+            </div>
         </div>
     </div>
 
-
-    <div class="row mb-5 mt-5">
-        <div class="col">
-            <div class="border p-4">
-                <p class="text-uppercase caption text-muted">Overview</p>
-
-                <p class="text-uppercase">Product Owner</p>
-                <div class="alert alert-light" role="alert">
-                    NO INFO
+    <div class="row row-cards mt-2">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="subheader">Components</div>
+                    <div class="h3 m-0">@Model.Components.Count</div>
                 </div>
-                <p class="text-uppercase">Product Team</p>
-                <div class="alert alert-light" role="alert">
-                    NO INFO
-                </div>
-                <p class="text-uppercase">Contact</p>
-                <button type="button" class="btn btn-primary">Email</button>
+            </div>
+        </div>
 
-                <p class="text-uppercase mt-3">Tags</p>
-                <div class="w-100 ps-1 pb-2">
-                    <div class="col">
-                        <span class="badge base rounded-pill bg-success">@Model.Tenant</span>
-                        <span class="badge base rounded-pill bg-info">@Model.Name</span>
-                        <span class="badge base rounded-pill bg-secondary">tag</span>
-                    </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="subheader">Tokens</div>
+                    <div class="h3 m-0">@Model.Tokens.Count</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="subheader">Retentions</div>
+                    <div class="h3 m-0">@Model.ProductRetentions.Count</div>
                 </div>
             </div>
         </div>
     </div>
 
+    <h2 class="page-title mt-5">Components</h2>
+    <h5 class="">List</h5>
+    <div class="row row-cards mt-1">
+        @if (Model.Components.Count == 0)
+        {
+            <div class="alert alert-warning" role="alert">
+                <h4 class="alert-title">No components yet!</h4>
+                <div class="text-muted">To create a new component, please use Andy X Cli or Andy X Clients.</div>
+            </div>
+        }
+        @foreach (var component in Model.Components)
+        {
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-auto">
+                                <span class="avatar avatar-lg" style="">
+                                    <img src="~/assets/component.png" width="64" height="64" alt="component">
 
-    <h6 class="text-uppercase text-muted  mt-5">Components</h6>
-    @foreach (var component in Model.Components.Values)
-    {
-        <div class="card border rounded-0 mb-3">
-            <div class="d-flex  g-0">
-                <div class="col-md-2 d-flex  justify-content-center align-items-center bg-light"
-                 style="height: 131px;">
-                    <img src="~/assets/component-100.png"
-                     height="70"
-                     alt=""
-                     loading="lazy" />
-
-                </div>
-
-                <div class="col-md-8">
-                    <div class="card-body px-3 pt-2">
-                        <h6 class="text-uppercase text-muted">Component</h6>
-                        <div class="row">
-                            <div class="col">
-                                <h5 class="w-100 mb-3"><strong>@component.Name</strong></h5>
+                                </span>
                             </div>
-                        </div>
-                        <div class="position-absolute" style="bottom: 0;">
-                            <div class="w-100 ps-1 pb-2">
-                                <div class="col">
-                                    <span class="badge rounded-pill bg-primary">@component.Id</span>
+                            <div class="col">
+                                <div class="text-muted">
+                                    Component
+                                </div>
+                                <h4 class="card-title m-0">
+                                    <a asp-area="" asp-controller="Components" asp-action="Details" asp-route-tenant="@Model.Tenant" asp-route-product="@Model.Name" asp-route-id="@component">@component</a>
+                                </h4>
+                                <div class="small mt-1">
+                                    <span class="badge bg-green"></span> Online
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <a asp-area="" asp-controller="Components" asp-action="Details" asp-route-tenant="@Model.Tenant" asp-route-product="@Model.Name" asp-route-id="@component" class="btn">
+                                    View
+                                </a>
+
+                            </div>
+                            <div class="col-auto">
+                                <div class="dropdown">
+                                    <a href="#" class="card-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/dots-vertical -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><circle cx="12" cy="12" r="1" /><circle cx="12" cy="19" r="1" /><circle cx="12" cy="5" r="1" /></svg>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col p-5 d-grid gap-2 d-md-flex align-items-center justify-content-md-end">
-                    <a class="btn btn-light" type="button" asp-area="" asp-controller="Components" asp-action="Details" asp-route-tenant="@Model.Tenant" asp-route-product="@Model.Name" asp-route-id="@component.Name">View</a>
-                </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 
     <h6 class="text-uppercase text-muted  mt-5">Count @Model.Components.Count</h6>
 
+    <div class="modal modal-blur fade" id="modal-settings" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Product Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
 
+
+                    <div class="col-auto">
+                        <div class="card">
+                            <ul class="nav nav-tabs nav-fill" data-bs-toggle="tabs">
+                                <li class="nav-item">
+                                    <a href="#tabs-overview" class="nav-link active" data-bs-toggle="tab">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><polyline points="5 12 3 12 12 3 21 12 19 12" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                                        Overview
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#tabs-authorization" class="nav-link" data-bs-toggle="tab">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/user -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-certificate" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <circle cx="15" cy="15" r="3"></circle>
+                                            <path d="M13 17.5v4.5l2 -1.5l2 1.5v-4.5"></path>
+                                            <path d="M10 19h-5a2 2 0 0 1 -2 -2v-10c0 -1.1 .9 -2 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -1 1.73"></path>
+                                            <line x1="6" y1="9" x2="18" y2="9"></line>
+                                            <line x1="6" y1="12" x2="9" y2="12"></line>
+                                            <line x1="6" y1="15" x2="8" y2="15"></line>
+                                        </svg>
+                                        Authorization
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#tabs-retention" class="nav-link" data-bs-toggle="tab">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/activity -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-stats" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4"></path>
+                                            <path d="M18 14v4h4"></path>
+                                            <circle cx="18" cy="18" r="4"></circle>
+                                            <path d="M15 3v4"></path>
+                                            <path d="M7 3v4"></path>
+                                            <path d="M3 11h16"></path>
+                                        </svg>
+                                        Retention Policy
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active show" id="tabs-overview">
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Tenant</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.Tenant" placeholder="No Information">
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Product</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.Name" placeholder="No Information">
+                                        </div>
+
+                                        <div class="form-label">Settings</div>
+
+
+                                        @if (Model.ProductSettings.IsAuthorizationEnabled == true)
+                                        {
+                                            <label class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" disabled checked>
+                                                <span class="form-check-label">Authorization</span>
+                                            </label>
+                                        }
+                                        else
+                                        {
+                                            <label class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" disabled>
+                                                <span class="form-check-label">Authorization</span>
+                                            </label>
+                                        }
+
+
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Updated by</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.UpdatedBy" placeholder="No Information">
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Updated date</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.UpdatedDate" placeholder="No Information">
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Created by</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.CreatedBy" placeholder="No Information">
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Created date</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.CreatedDate" placeholder="No Information">
+                                        </div>
+
+
+                                    </div>
+                                    <div class="tab-pane" id="tabs-authorization">
+
+                                        <div class="alert alert-info" role="alert">
+                                            <div class="d-flex">
+                                                <div>
+                                                    <!-- Download SVG icon from http://tabler-icons.io/i/info-circle -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12.01" y2="8"></line><polyline points="11 12 12 12 12 16 13 16"></polyline></svg>
+                                                </div>
+                                                <div>
+                                                    <h4 class="alert-title">Did you know?</h4>
+                                                    <div class="text-muted">API Keys and Secrets cannot be created or revoked from here the Portal. To generate a token please use Andy X Cli</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12">
+                                            @foreach (var token in Model.Tokens)
+                                            {
+                                                <div class="card mt-1">
+                                                    <div class="card-body">
+                                                        <div class="row g-2 align-items-center">
+                                                            <div class="col-auto">
+                                                                <span class="avatar avatar-lg" style="">
+                                                                    <img src="~/assets/token.png" width="40" height="40" alt="tenant">
+
+                                                                </span>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="text-muted">
+                                                                    Token
+                                                                </div>
+                                                                <h4 class="card-title m-0">
+                                                                    <a>@token.Key</a>
+                                                                </h4>
+
+                                                                <div class="text-muted">
+                                                                    Is Active: @token.IsActive
+                                                                </div>
+                                                                <div class="text-muted">
+                                                                    Expire Date: @token.ExpireDate.ToString()
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            }
+                                        </div>
+
+
+                                    </div>
+                                    <div class="tab-pane" id="tabs-retention">
+                                        <div class="alert alert-info" role="alert">
+                                            <div class="d-flex">
+                                                <div>
+                                                    <!-- Download SVG icon from http://tabler-icons.io/i/info-circle -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="8" x2="12.01" y2="8"></line><polyline points="11 12 12 12 12 16 13 16"></polyline></svg>
+                                                </div>
+                                                <div>
+                                                    <h4 class="alert-title">Did you know?</h4>
+                                                    <div class="text-muted">Retention Policies can not be created from Andy X Portal. To create or update retentions please use Andy X Cli</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            @foreach (var retention in Model.ProductRetentions)
+                                            {
+                                                <div class="card mt-1">
+                                                    <div class="card-body">
+                                                        <div class="row g-2 align-items-center">
+                                                            <div class="col-auto">
+                                                                <span class="avatar avatar-lg" style="">
+                                                                    <img src="~/assets/retention.png" width="40" height="40" alt="tenant">
+
+                                                                </span>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="text-muted">
+                                                                    Retention Policy
+                                                                </div>
+                                                                <h4 class="card-title m-0">
+                                                                    <a>@retention.Name</a>
+                                                                </h4>
+
+                                                                <div class="text-muted">
+                                                                    Type: @retention.Type.ToString()
+                                                                </div>
+                                                                <div class="text-muted">
+                                                                    TTL (time to live in minutes): @retention.TimeToLiveInMinutes
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            }
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn" disabled data-bs-dismiss="modal">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

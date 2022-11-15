@@ -4,93 +4,269 @@
     ViewData["Title"] = @Model.Name;
 }
 
-<div class="border-bottom" style="height:30px" aria-label="breadcrumb">
-    <ol class="breadcrumb ms-3 p-1">
-        <li class="breadcrumb-item"><a asp-area="" asp-controller="Products" asp-action="Index">PRODUCTS</a></li>
-        <li class="breadcrumb-item"><a asp-area="" asp-controller="Products" asp-action="Details" asp-route-tenant="@Model.Tenant" asp-route-id="@Model.Product">@Model.Product</a></li>
-        <li class="breadcrumb-item"><a asp-area="" asp-controller="Components" asp-action="Details" asp-route-tenant="@Model.Tenant" asp-route-product="@Model.Product" asp-route-id="@Model.Component">@Model.Component</a></li>
-        <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
-    </ol>
-</div>
-
 <div class="container mt-5">
-    <h6 class="text-uppercase text-muted">Topic</h6>
-    <div class="row">
-        <p class="col-auto header"><strong>@Model.Name</strong></p>
-        <div class="col-auto">
-            @if (Model.TopicSettings.IsPersistent == true)
-            {
-                <p>
-                    <span class="badge subtitle rounded-pill bg-info"
-                      data-mdb-toggle="popover"
-                      title="PERSISTENT"
-                      data-mdb-content="Messages are stored in the topic, and they can be consumed later.">PERSISTENT</span>
-                </p>
-            }
-            else
-            {
-                <p>
-                    <span class="badge subtitle rounded-pill bg-secondary"
-                      data-mdb-toggle="popover"
-                      title="NON PERSISTENT"
-                      data-mdb-content="Messages are not stored in the topic, they can not be consumed later. e.g., this type of topics should be used only for realtime/notifications">NON PERSISTENT</span>
-                </p>
-            }
-        </div>
-    </div>
 
-    <div class="row mb-5 mt-5">
-        <div class="col">
-            <div class="border p-4">
-                <p class="text-uppercase caption text-muted">Overview</p>
-
-                <p class="text-uppercase">Tenant</p>
-                <div class="alert alert-light" role="alert">
-                    @Model.Tenant
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <span class="avatar avatar-lg" style="">
+                    <img src="~/assets/topic.png" width="64" height="64" alt="topic">
+                </span>
+            </div>
+            <div class="col">
+                <h1 class="page-title">@Model.Name</h1>
+                <div class="page-subtitle">
+                    <div class="row">
+                        <div class="col-auto">
+                            <a class="text-reset">@Model.Tenant / @Model.Product / @Model.Component / @Model.Name</a>
+                        </div>
+                        <div class="col-auto text-success">
+                            active
+                        </div>
+                    </div>
                 </div>
-                <p class="text-uppercase">Product</p>
-                <div class="alert alert-light" role="alert">
-                    @Model.Product
-                </div>
-                <p class="text-uppercase">Component</p>
-                <div class="alert alert-light" role="alert">
-                    @Model.Component
-                </div>
-                <p class="text-uppercase">Location</p>
-                <div class="alert alert-light font-weight-bold" role="alert">
-                    @Model.Tenant / @Model.Product / @Model.Component / @Model.Name
-                </div>
+            </div>
+            <div class="col-auto d-none d-md-flex">
+                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-settings">
+                    Settings
+                </a>
             </div>
         </div>
     </div>
 
-    <div class="row mb-5 mt-5">
-
-        <div class="col">
-            <div class="border p-4">
-                <p class="text-uppercase caption text-muted">In Rate</p>
-                <p class="subheader"><strong>0.00</strong></p>
-            </div>
-        </div>
-        <div class="col">
-            <div class=" border p-4">
-                <p class="text-uppercase caption text-muted">Out Rate</p>
-                <p class="subheader"><strong>0.00</strong></p>
-            </div>
-        </div>
-        <div class="col">
-            <div class="border p-4">
-                <p class="text-uppercase caption text-muted">In throughput</p>
-                <p class="subheader"><strong>0 Bytes</strong></p>
-            </div>
-        </div>
-        <div class="col">
-            <div class="border p-4">
-                <p class="text-uppercase caption text-muted">Out throughput</p>
-                <p class="subheader"><strong>0 Bytes</strong></p>
+    <div class="row row-cards mt-2">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="subheader">Data ingestion</div>
+                    <div class="h3 m-0">@Model.Producers.Count</div>
+                </div>
             </div>
         </div>
 
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="subheader">Subscriptions</div>
+                    <div class="h3 m-0">@Model.Subscriptions.Count</div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <h2 class="page-title mt-5">Data Ingestion</h2>
+    <h5 class="">List</h5>
+    <div class="row row-cards mt-1">
+        @if (Model.Producers.Count == 0)
+        {
+            <div class="alert alert-warning" role="alert">
+                <h4 class="alert-title">No producers yet!</h4>
+                <div class="text-muted">To create a new producer, please use Andy X Cli or Andy X Clients.</div>
+            </div>
+        }
+        @foreach (var producer in Model.Producers)
+        {
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-auto">
+                                <span class="avatar avatar-lg" style="">
+                                    <img src="~/assets/producer.png" width="64" height="64" alt="producer">
+                                </span>
+                            </div>
+                            <div class="col">
+                                <div class="text-muted">
+                                    Producer
+                                </div>
+                                <h4 class="card-title m-0">
+                                    <a asp-controller="Producers" asp-action="Details" asp-route-tenant="@Model.Tenant" asp-route-product="@Model.Product" asp-route-component="@Model.Component" asp-route-topic="@Model.Name" asp-route-id="@producer">@producer</a>
+                                </h4>
+                            </div>
+                            <div class="col-auto">
+                                <a asp-controller="Producers" asp-action="Details" asp-route-tenant="@Model.Tenant" asp-route-product="@Model.Product" asp-route-component="@Model.Component" asp-route-topic="@Model.Name" asp-route-id="@producer" class="btn">
+                                    View
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <h2 class="page-title mt-5">Subscriptions</h2>
+    <h5 class="">List</h5>
+    <div class="row row-cards mt-1">
+        @if (Model.Subscriptions.Count == 0)
+        {
+            <div class="alert alert-warning" role="alert">
+                <h4 class="alert-title">No subscription yet!</h4>
+                <div class="text-muted">To create a new subscription, please use Andy X Cli or Andy X Clients.</div>
+            </div>
+        }
+        @foreach (var subscription in Model.Subscriptions)
+        {
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-auto">
+                                <span class="avatar avatar-lg" style="">
+                                    <img src="~/assets/subscription.png" width="64" height="64" alt="subscription">
+
+                                </span>
+                            </div>
+                            <div class="col">
+                                <div class="text-muted">
+                                    Subscription
+                                </div>
+                                <h4 class="card-title m-0">
+                                    <a asp-controller="Subscriptions" asp-action="Details" asp-route-tenant="@Model.Tenant" asp-route-product="@Model.Product" asp-route-component="@Model.Component" asp-route-topic="@Model.Name" asp-route-id="@subscription.Name">@subscription.Name</a>
+                                </h4>
+                                <div class="text-muted">
+                                    @subscription.Type.ToString()
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <a asp-controller="Subscriptions" asp-action="Details" asp-route-tenant="@Model.Tenant" asp-route-product="@Model.Product" asp-route-component="@Model.Component" asp-route-topic="@Model.Name" asp-route-id="@subscription.Name" class="btn">
+                                    View
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+
+    <div class="modal modal-blur fade" id="modal-settings" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Topic Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="col-auto">
+                        <div class="card">
+                            <ul class="nav nav-tabs nav-fill" data-bs-toggle="tabs">
+                                <li class="nav-item">
+                                    <a href="#tabs-overview" class="nav-link active" data-bs-toggle="tab">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><polyline points="5 12 3 12 12 3 21 12 19 12" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                                        Overview
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active show" id="tabs-overview">
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Tenant</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.Tenant" placeholder="No Information">
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Product</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.Product" placeholder="No Information">
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Component</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.Component" placeholder="No Information">
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Topic</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.Name" placeholder="No Information">
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Description</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.Description" placeholder="No Information">
+                                        </div>
+
+                                        <div class="form-label">Settings</div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Write buffer size (Bytes)</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.TopicSettings.WriteBufferSizeInBytes" placeholder="No Information">
+                                            <label class="subheader">write_buffer_size sets the size of a single memtable. Once memtable exceeds this size, it is marked immutable and a new one is created, for now we are creating as 64MB SIZE</label>
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Max write buffer number</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.TopicSettings.MaxWriteBufferNumber" placeholder="No Information">
+                                            <label class="subheader">max_write_buffer_number sets the maximum number of memtables, both active and immutable. If the active memtable fills up and the total number of memtables is larger than max_write_buffer_number we stall further writes. This may happen if the flush process is slower than the write rate.</label>
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Max write buffer size to maintain</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.TopicSettings.MaxWriteBufferSizeToMaintain" placeholder="No Information">
+                                            <label class="subheader">the amount of write history to maintain in memory, in bytes. This includes the current memtable size, sealed but unflushed memtables, and flushed memtables that are kept around. Andy X will try to keep at least this much history in memory - if dropping a flushed memtable would result in history falling below this threshold, it would not be dropped. (Default: 0)</label>
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Min write buffer number to merge</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.TopicSettings.MinWriteBufferNumberToMerge" placeholder="No Information">
+                                            <label class="subheader">min_write_buffer_number_to_merge is the minimum number of memtables to be merged before flushing to storage. For example, if this option is set to 2, immutable memtables are only flushed when there are two of them - a single immutable memtable will never be flushed. If multiple memtables are merged together, less data may be written to storage since two updates are merged to a single key. However, every Get() must traverse all immutable memtables linearly to check if the key is there. Setting this option too high may hurt read performance.</label>
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Max background compactions threads</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.TopicSettings.MaxBackgroundCompactionsThreads" placeholder="No Information">
+                                            <label class="subheader">max_background_compactions is the maximum number of concurrent background compactions. The default is 1, but to fully utilize your CPU and storage you might want to increase this to the minimum of (the number of cores in the system, the disk throughput divided by the average throughput of one compaction thread).</label>
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Max background flushes threads</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.TopicSettings.MaxBackgroundFlushesThreads" placeholder="No Information">
+                                            <label class="subheader">max_background_flushes is the maximum number of concurrent flush operations. It is usually good enough to set this to 1.</label>
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Updated by</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.UpdatedBy" placeholder="No Information">
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Updated date</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.UpdatedDate" placeholder="No Information">
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Created by</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.CreatedBy" placeholder="No Information">
+                                        </div>
+
+                                        <div class="mb-3 mt-3">
+                                            <label class="form-label">Created date</label>
+                                            <input type="text" class="form-control" name="example-text-input" disabled value="@Model.CreatedDate" placeholder="No Information">
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn" disabled data-bs-dismiss="modal">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </div>

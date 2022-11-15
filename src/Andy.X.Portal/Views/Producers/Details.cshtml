@@ -1,84 +1,92 @@
 ﻿@using Andy.X.Portal.Models.Producers
 @model ProducerDetailsViewModel
 @{
-    ViewData["Title"] = @Model.ProducerName;
+    ViewData["Title"] = @Model.Name;
 }
 
-<div class="border-bottom" style="height:30px" aria-label="breadcrumb">
-    <ol class="breadcrumb ms-3 p-1">
-        <li class="breadcrumb-item"><a asp-area="" asp-controller="Producers" asp-action="Index">PRODUCERS</a></li>
-        <li class="breadcrumb-item active" aria-current="page">@Model.ProducerName</li>
-    </ol>
-</div>
-
 <div class="container mt-5">
-    <h6 class="text-uppercase text-muted">Producer</h6>
-    <div class="row">
-        <p class="col-auto header"><strong>@Model.ProducerName</strong></p>
-        <div class="col-auto">
-            <p><span class="badge subtitle rounded-pill bg-success">ONLINE</span></p>
-        </div>
-    </div>
-    <p class="col-auto subheader">@Model.Tenant / @Model.Product / @Model.Component / @Model.Topic / <strong>@Model.ProducerName</strong></p>
 
-    <div class="row mb-5 mt-5">
-        <div class="col">
-            <div class="border p-4">
-                <p class="text-uppercase caption text-muted">Number of messages produced from last connection</p>
-                <p class="subheader"><strong>@Model.CountMessagesProducedSinceConnected</strong></p>
+
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <span class="avatar avatar-lg" style="">
+                    <img src="~/assets/producer.png" width="64" height="64" alt="producer">
+                </span>
             </div>
-        </div>
-        <div class="col">
-            <div class=" border p-4">
-                <p class="text-uppercase caption text-muted">Memory Consumption</p>
-                <p class="subheader"><strong>0 Bytes</strong></p>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row mb-5 mt-5">
-        <div class="col">
-            <div class="border p-4">
-                <p class="text-uppercase caption text-muted">Overview</p>
-
-                <p class="text-uppercase">Tenant</p>
-                <div class="alert alert-light base" role="alert">
-                    @Model.Tenant
-                </div>
-                <p class="text-uppercase">Product</p>
-                <div class="alert alert-light base" role="alert">
-                    @Model.Product
-                </div>
-                <p class="text-uppercase">Component</p>
-                <div class="alert alert-light base" role="alert">
-                    @Model.Component
-                </div>
-                <p class="text-uppercase">Topic</p>
-                <div class="alert alert-light base" role="alert">
-                    @Model.Topic
-                </div>
-
-                <p class="text-uppercase">Producer Id</p>
-                <div class="alert alert-light base" role="alert">
-                    @Model.Id
-                </div>
-
-                <p class="text-uppercase">Producer Name</p>
-                <div class="alert alert-light base" role="alert">
-                    @Model.ProducerName
-                </div>
-                <p class="text-uppercase">Connected to this node</p>
-                <div class="alert alert-light base" role="alert">
-                    @Model.IsLocal.ToString()
-                </div>
-
-                <p class="text-uppercase">Connection Date</p>
-                <div class="alert alert-light base" role="alert">
-                    @Model.ConnectedDate.ToString("yyyy-MM-dd HH:mm:ss")
+            <div class="col">
+                <h1 class="page-title">@Model.Name</h1>
+                <div class="page-subtitle">
+                    <div class="row">
+                        <div class="col-auto">
+                            <a class="text-reset">@Model.Tenant / @Model.Product / @Model.Component / @Model.Topic</a>
+                        </div>
+                        <div class="col-auto text-success">
+                            @Model.InstanceType.ToString().ToUpper()
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <div class="row row-cards mt-2">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="header">Producer</div>
+                    <div class="subheader">Overview</div>
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Producer Name</label>
+                        <input type="text" class="form-control" name="example-text-input" disabled value="@Model.Name" placeholder="No Information">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Location</label>
+                        <input type="text" class="form-control" name="example-text-input" disabled value="@Model.Tenant / @Model.Product / @Model.Component / @Model.Name" placeholder="No Information">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Instance Type</label>
+                        <input type="text" class="form-control" name="example-text-input" disabled value="@Model.InstanceType.ToString()" placeholder="No Information">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Public Ip Range</label>
+                        <input type="text" class="form-control" name="example-text-input" disabled value="@string.Join(", ",Model.PublicIpRange) " placeholder="No Information">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Private Ip Range</label>
+                        <input type="text" class="form-control" name="example-text-input" disabled value="@string.Join(", ",Model.PrivateIpRange) " placeholder="No Information">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Updated by</label>
+                        <input type="text" class="form-control" name="example-text-input" disabled value="@Model.UpdatedBy" placeholder="No Information">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Updated date</label>
+                        <input type="text" class="form-control" name="example-text-input" disabled value="@Model.UpdatedDate" placeholder="No Information">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Created by</label>
+                        <input type="text" class="form-control" name="example-text-input" disabled value="@Model.CreatedBy" placeholder="No Information">
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Created date</label>
+                        <input type="text" class="form-control" name="example-text-input" disabled value="@Model.CreatedDate" placeholder="No Information">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </div>
