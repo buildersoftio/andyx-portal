@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <UserSecretsId>bb695a85-1150-4030-aa62-fee35a111e5b</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
@@ -14,17 +14,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="src\wwwroot\js\site.js" />
+    <Compile Remove="Models\Products\Components\**" />
+    <Compile Remove="src\**" />
+    <Content Remove="Models\Products\Components\**" />
+    <Content Remove="src\**" />
+    <EmbeddedResource Remove="Models\Products\Components\**" />
+    <EmbeddedResource Remove="src\**" />
+    <None Remove="Models\Products\Components\**" />
+    <None Remove="src\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\Products\Components\" />
   </ItemGroup>
 
 </Project>

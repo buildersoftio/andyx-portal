@@ -1,0 +1,77 @@
+﻿@using Andy.X.Portal.Models.Subscriptions
+@model SubscriptionListViewModel
+@{
+    ViewData["Title"] = "Subscriptions";
+}
+
+<div class="container mt-5">
+    @if (Model.Subscriptions.Count == 0)
+    {
+        <div class="alert alert-warning" role="alert">
+            <center>There is no <strong>Subscription</strong> connected at the moment!</center>
+            <div class="text-muted"><center>To create a new subscription, please use Andy X Cli or Andy X Clients.</center></div>
+        </div>
+    }
+    else{
+        <h1 class="page-title mt-5">Subscriptions</h1>
+        <h5 class="">List</h5>
+        <div class="row row-cards mt-1">
+
+            @foreach (var subscription in Model.Subscriptions)
+            {
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row g-2 align-items-center">
+                                <div class="col-auto">
+                                    <span class="avatar avatar-lg" style="">
+                                        <img src="./assets/subscription.png" width="64" height="64" alt="subscription">
+
+                                    </span>
+                                </div>
+                                <div class="col">
+                                    <div class="text-muted">
+                                        Subscription
+                                    </div>
+                                    <h4 class="card-title m-0">
+                                        <a asp-controller="Subscriptions" asp-action="Details" asp-route-tenant="@subscription.Tenant" asp-route-product="@subscription.Product" asp-route-component="@subscription.Component" asp-route-topic="@subscription.Topic" asp-route-id="@subscription.Name">@subscription.Name</a>
+                                    </h4>
+                                    <div class="text-muted">
+                                        @subscription.Location
+                                    </div>
+                                    @if (subscription.IsActive)
+                                    {
+                                        <div class="small mt-1">
+                                            <span class="badge bg-green"></span> Online
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="small mt-1">
+                                            <span class="badge bg-danger"></span> Offline
+                                        </div>
+                                    }
+
+                                </div>
+                                <div class="col-auto">
+                                    <a asp-controller="Subscriptions" asp-action="Details" asp-route-tenant="@subscription.Tenant" asp-route-product="@subscription.Product" asp-route-component="@subscription.Component" asp-route-topic="@subscription.Topic" asp-route-id="@subscription.Name" class="btn">
+                                        View
+                                    </a>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="dropdown">
+                                        <a href="#" class="card-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/dots-vertical -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><circle cx="12" cy="12" r="1" /><circle cx="12" cy="19" r="1" /><circle cx="12" cy="5" r="1" /></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+</div>

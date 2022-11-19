@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1000 1000" style="enable-background:new 0 0 1000 1000;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#08082B;}
+	.st1{fill:url(#SVGID_1_);}
+	.st2{fill:url(#SVGID_2_);}
+	.st3{fill:url(#SVGID_3_);}
+	.st4{fill:url(#SVGID_4_);}
+	.st5{fill:url(#SVGID_5_);}
+	.st6{fill:url(#SVGID_6_);}
+	.st7{fill:url(#SVGID_7_);}
+	.st8{fill:url(#SVGID_8_);}
+	.st9{fill:url(#SVGID_9_);}
+	.st10{fill:url(#SVGID_10_);}
+	.st11{fill:url(#SVGID_11_);}
+	.st12{fill:url(#SVGID_12_);}
+	.st13{fill:url(#SVGID_13_);}
+	.st14{fill:url(#SVGID_14_);}
+	.st15{fill:url(#SVGID_15_);}
+	.st16{fill:#FFFFFF;}
+</style>
+<g>
+	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="504.6105" y1="799.3109" x2="500.059" y2="319.1264">
+		<stop  offset="0" style="stop-color:#8B54FF"/>
+		<stop  offset="1" style="stop-color:#15D7FF"/>
+	</linearGradient>
+	<path class="st1" d="M617.7,296.2L500,438.3L382.3,296.2c-4-4.8-9.9-7.6-16.1-7.6h-45c-17.7,0-27.4,20.6-16.1,34.2l147,177.5
+		l47.8,57.9l47.9-57.9l90.1-108.8l56.9-68.7c11.3-13.6,1.6-34.2-16.1-34.2h-45C627.5,288.6,621.6,291.4,617.7,296.2z"/>
+	<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="481.7316" y1="517.5964" x2="680.4056" y2="284.4466">
+		<stop  offset="0.2232" style="stop-color:#000000;stop-opacity:0.2"/>
+		<stop  offset="0.2343" style="stop-color:#020F12;stop-opacity:0.1933"/>
+		<stop  offset="0.2703" style="stop-color:#063E49;stop-opacity:0.1713"/>
+		<stop  offset="0.3075" style="stop-color:#0A677A;stop-opacity:0.1486"/>
+		<stop  offset="0.3452" style="stop-color:#0D89A3;stop-opacity:0.1255"/>
+		<stop  offset="0.3835" style="stop-color:#10A5C4;stop-opacity:0.1022"/>
+		<stop  offset="0.4226" style="stop-color:#12BBDE;stop-opacity:7.833258e-02"/>
+		<stop  offset="0.4627" style="stop-color:#14CBF0;stop-opacity:5.385284e-02"/>
+		<stop  offset="0.5045" style="stop-color:#15D4FB;stop-opacity:2.831410e-02"/>
+		<stop  offset="0.5509" style="stop-color:#15D7FF;stop-opacity:0"/>
+	</linearGradient>
+	<path class="st2" d="M678.8,288.6c17.7,0,27.4,20.6,16.1,34.2l-56.9,68.7l-90.1,108.8L500,558.1V438.3l117.7-142.1
+		c4-4.8,9.9-7.6,16.1-7.6H678.8z"/>
+	<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="510.0851" y1="502.5151" x2="398.0708" y2="380.02">
+		<stop  offset="0.2434" style="stop-color:#000000;stop-opacity:0.2"/>
+		<stop  offset="0.2752" style="stop-color:#000405;stop-opacity:0.1793"/>
+		<stop  offset="0.3132" style="stop-color:#021114;stop-opacity:0.1546"/>
+		<stop  offset="0.3544" style="stop-color:#04252C;stop-opacity:0.1278"/>
+		<stop  offset="0.3979" style="stop-color:#06414D;stop-opacity:9.950818e-02"/>
+		<stop  offset="0.4431" style="stop-color:#0A6679;stop-opacity:7.008202e-02"/>
+		<stop  offset="0.4899" style="stop-color:#0E93AE;stop-opacity:3.968641e-02"/>
+		<stop  offset="0.537" style="stop-color:#13C6EB;stop-opacity:9.066656e-03"/>
+		<stop  offset="0.5509" style="stop-color:#15D7FF;stop-opacity:0"/>
+	</linearGradient>
+	<path class="st3" d="M500,438.3v119.8l-47.8-57.9l-147-177.5c-11.3-13.6-1.6-34.2,16.1-34.2h45c6.2,0,12.1,2.8,16.1,7.6L500,438.3z
+		"/>
+	<linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="500.7124" y1="769.4218" x2="496.172" y2="290.4073">
+		<stop  offset="0" style="stop-color:#8B54FF"/>
+		<stop  offset="1" style="stop-color:#15D7FF"/>
+	</linearGradient>
+	<path class="st4" d="M547.9,500.4L500,442.5l-47.8,57.9L305.7,677.2c-11.3,13.6-1.6,34.2,16.1,34.2h44.9c6.2,0,12.1-2.8,16.1-7.6
+		L500,562.4l117.1,141.5c4,4.8,9.9,7.6,16.1,7.6h44.9c17.7,0,27.4-20.6,16.1-34.2L547.9,500.4z"/>
+	<linearGradient id="SVGID_5_" gradientUnits="userSpaceOnUse" x1="500.3785" y1="752.7445" x2="497.0937" y2="406.1883">
+		<stop  offset="0" style="stop-color:#8B54FF"/>
+		<stop  offset="1" style="stop-color:#15D7FF"/>
+	</linearGradient>
+	<polygon class="st5" points="550.6,711.4 500,650.3 449.4,711.4 	"/>
+</g>
+</svg>

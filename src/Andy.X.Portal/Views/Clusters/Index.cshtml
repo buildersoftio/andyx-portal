@@ -1,0 +1,214 @@
+﻿@using Andy.X.Portal.Models.Clusters
+@model ClustersDetailsViewModel
+@{
+    ViewData["Title"] = "Clusters";
+}
+
+<div class="container mt-5">
+    <h1 class="page-title">Clusters</h1>
+    <h5 class="">Overview</h5>
+    <div class="row row-deck row-cards mt-1">
+        <div class="col-sm-6 col-lg-3">
+            <div class="card">
+                <div class="card-body p-2 text-center">
+                    <div class="text-end text-green">
+                        <span class="text-green d-inline-flex align-items-center lh-1">
+                            12% <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
+                        </span>
+                    </div>
+                    <div class="h1 m-0">@Model.InThroughputInMB MB/s</div>
+                    <div class="text-muted mb-3">In Throughput</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card">
+                <div class="card-body p-2 text-center">
+                    <div class="text-end text-green">
+                        <span class="text-green d-inline-flex align-items-center lh-1">
+                            120% <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
+                        </span>
+                    </div>
+                    <div class="h1 m-0">@Model.OutThroughputInMB MB/s</div>
+                    <div class="text-muted mb-3">Out Throughput</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card">
+                <div class="card-body p-2 text-center">
+                    <div class="text-end text-green">
+                        <span class="text-green d-inline-flex align-items-center lh-1">
+                            52% <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
+                        </span>
+                    </div>
+                    <div class="h1 m-0">@Model.ActiveDataIngestions</div>
+                    <div class="text-muted mb-3">Active Data Ingestions</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card">
+                <div class="card-body p-2 text-center">
+                    <div class="text-end text-green ">
+                        <span class="text-green d-inline-flex align-items-center lh-1">
+                            87% <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
+                        </span>
+                    </div>
+                    <div class="h1 m-0">@Model.ActiveSubscriptions</div>
+                    <div class="text-muted mb-3">Active Subscriptions</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*    <div class="card page-header mt-5">
+    <div class=" card-body row align-items-center">
+    <div class="col-auto">
+    <span class="avatar avatar-lg" style="">
+    <img src="~/assets/andyx-logo.svg" alt="tenant">
+    </span>
+    </div>
+    <div class="col">
+    <div class="page-subtitle">
+    <div class="row">
+    <div class="col-auto">
+    <a class="text-reset">Portal is connected to node</a>
+    </div>
+    </div>
+    </div>
+    <h1 class="page-title">@Model.CurrentNode.NodeId</h1>
+
+    </div>
+    <div class="col-auto d-none d-md-flex">
+    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-settings">
+    Logs
+    </a>
+    </div>
+    </div>
+    </div>
+    *@
+    <h5 class="mt-5">Cluster Name</h5>
+    @if (Model.Status == ClusterStatus.Online)
+    {
+        <div class="card bg-teal-lt g-2 align-items-center">
+            <h1 class="page-title mt-3"><strong>@Model.Name</strong></h1>
+            <div class="small mt-1 mb-1 ">
+                <span class="badge bg-green "></span> Online
+            </div>
+            <h4 class="mb-3">Distribution type is <strong>@Model.ShardDistributionType</strong></h4>
+        </div>
+    }
+    else if (Model.Status == ClusterStatus.PartiallyOnline)
+    {
+        <div class="card bg-warning-lt g-2 align-items-center">
+            <h1 class="page-title mt-3"><strong>@Model.Name</strong></h1>
+            <div class="small mt-1  mb-1">
+                <span class="badge bg-warning "></span> Partially Online, some nodes are not connected
+            </div>
+            <h4 class="mb-3">Distribution type is <strong>@Model.ShardDistributionType</strong></h4>
+        </div>
+    }
+    else
+    {
+        <div class="card bg-danger-lt g-2 align-items-center">
+            <h1 class="page-title mt-3"><strong>@Model.Name</strong></h1>
+            <div class="small mt-1  mb-1">
+                <span class="badge bg-danger "></span> @Model.Status
+            </div>
+            <h4 class="mb-3">Distribution type is <strong>@Model.ShardDistributionType</strong></h4>
+        </div>
+    }
+
+    <h4 class="mt-3">Distributions (Shards)</h4>
+
+    @for (int i = 0; i < Model.Shards.Count; i++)
+    {
+        <h3 class="mt-3">Shard @i</h3>
+        <h4 class="">@Model.Shards[i].ReplicaDistributionType.ToString()</h4>
+        <div class="row row-cards">
+            @foreach (var replica in Model.Shards[i].Replicas)
+            {
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row g-2 align-items-center">
+                                <div class="col-auto">
+                                    <span class="avatar avatar-lg" style="background-image: url(./assets/andyx-logo.svg)"></span>
+                                </div>
+                                <div class="col">
+                                    <h4 class="card-title m-0">
+                                        <a data-bs-toggle="offcanvas" href="#@replica.NodeId" aria-controls="@replica.NodeId">@replica.Host</a>
+                                    </h4>
+                                    <div class="text-muted">
+                                        @replica.NodeId
+                                    </div>
+                                    <div class="text-muted">
+                                        @replica.Type.ToString()
+                                    </div>
+                                    @if (replica.IsConnected == true)
+                                    {
+                                        <div class="small mt-1">
+                                            <span class="badge bg-green"></span> Online
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="small mt-1">
+                                            <span class="badge bg-danger"></span> Offline, trying to reconnect
+                                        </div>
+                                    }
+
+                                </div>
+                                <div class="col-auto">
+                                    <a class="btn" data-bs-toggle="offcanvas" href="#@replica.NodeId" role="button" aria-controls="@replica.NodeId">
+                                        View
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="@replica.NodeId" aria-labelledby="@replica.NodeId" aria-modal="true" role="dialog">
+                    <div class="offcanvas-header">
+                        <h1 class="offcanvas-title" id="@replica.NodeId">@replica.NodeId</h1>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div>
+                            <label class="form-label">Node Id</label>
+                            <input type="text" class="form-control" name="example-disabled-input" placeholder="No information" value="@replica.NodeId" disabled="">
+
+                            <label class="form-label mt-2">Host</label>
+                            <input type="text" class="form-control" name="example-disabled-input" placeholder="No information" value="@replica.Host" disabled="">
+
+                            <label class="form-label mt-2">Type</label>
+                            <input type="text" class="form-control" name="example-disabled-input" placeholder="No information" value="@replica.Type.ToString()" disabled="">
+
+                            <label class="form-label mt-2">Connection Type</label>
+                            <input type="text" class="form-control" name="example-disabled-input" placeholder="No information" value="@replica.ConnectionType.ToString()" disabled="">
+
+                            <label class="form-label mt-2">Port</label>
+                            <input type="text" class="form-control" name="example-disabled-input" placeholder="No information" value="@replica.Port" disabled="">
+
+                            <label class="form-label mt-2">Username</label>
+                            <input type="text" class="form-control" name="example-disabled-input" placeholder="No information" value="@replica.Username" disabled="">
+
+                        </div>
+                        <div class="mt-3">
+                            <button class="btn" type="button" data-bs-dismiss="offcanvas">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+</div>
